@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { HeaderComponent } from "./shared/header/header.component";
+import { FooterComponent } from "./shared/footer/footer.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, MatInputModule, MatButtonModule],
+  imports: [RouterModule, RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

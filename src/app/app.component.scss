@@ -1,8 +1,19 @@
-.splash-container {
-  background: linear-gradient(to bottom right, #007bff, #6610f2);
-  font-family: 'Arial', sans-serif;
+html,body{
+  height: 100%;
 }
 
-.card {
-  background-color: white;
+.site-wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main{
+  flex: 1;
+  overflow-y: auto;
+}
+
+header,
+footer {
+  flex-shrink: 0;
 }
