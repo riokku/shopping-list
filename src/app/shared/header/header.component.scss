@@ -1,3 +1,43 @@
-.example-spacer {
+.mat-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-right: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.desktop-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.spacer {
   flex: 1 1 auto;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidenav-container {
+  height: calc(100vh - 64px);
+  margin-top: 64px;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+@media (max-width: 599px) {
+  .sidenav-container {
+    height: calc(100vh - 56px);
+    margin-top: 56px;
+  }
 }
