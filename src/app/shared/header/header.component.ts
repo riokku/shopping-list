@@ -1,14 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 
 @Component({
@@ -17,19 +17,18 @@ import { map, shareReplay } from 'rxjs/operators';
   imports: [
     MatToolbarModule,
     MatButtonModule,
-    MatSidenavModule,
     MatIconModule,
     MatListModule,
     MatMenuModule,
-    MatSidenav,
     AsyncPipe,
-    NgIf
+    NgIf,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  @ViewChild('drawer') drawer!: MatSidenav;
   private readonly breakpointObserver: BreakpointObserver;
   isHandset$: Observable<boolean>;
 
