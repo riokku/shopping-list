@@ -1,8 +1,21 @@
-.splash-container {
-  background: linear-gradient(to bottom right, #007bff, #6610f2);
-  font-family: 'Arial', sans-serif;
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }
 
-.card {
-  background-color: white;
+.example-full-width {
+  width: 100%;
+}
+
+.page-wrapper{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.create-list{
+  display: grid;
+  place-items: center;
 }
