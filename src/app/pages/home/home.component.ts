@@ -9,7 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {Observable, of} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { MatIcon } from '@angular/material/icon';
-
+import { StoreModel } from '../../shared/models/store.model';
 
 @Component({
   selector: 'app-home',
@@ -28,11 +28,11 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit{
-  testItemsList: string[] = [];
+  storeList: StoreModel[] = [];
   listDataDefaultService: ListDataDefaultService = inject(ListDataDefaultService);
 
   myControl = new FormControl('');
-  filteredOptions!: Observable<string[]>;
+  filteredOptions!: Observable<StoreModel[]>;
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -41,14 +41,14 @@ export class HomeComponent implements OnInit{
     );
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  private _filter(storeName: string): StoreModel[] {
+    const filterValue = storeName.toLowerCase();
 
-    return this.testItemsList.filter(option => option.toLowerCase().includes(filterValue));
+    return this.storeList.filter(store => store.storeName.toLowerCase().includes(filterValue));
   }
 
   constructor(){
-    this.testItemsList = this.listDataDefaultService.getItems();
+    this.storeList = this.listDataDefaultService.getItems();
   }
 
 }
