@@ -8,9 +8,9 @@
              matInput
              [formControl]="myControl"
              [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedStore">
         @for (store of filteredOptions | async; track store) {
-          <mat-option [value]="store.storeGUID">
+          <mat-option [value]="store">
             <div class="row store-selection-wrapper">
               <div class="col-4">
                 <img src="{{store.storeLogo}}" alt="{{store.storeName}}">
@@ -24,13 +24,11 @@
         }
       </mat-autocomplete>
     </mat-form-field>
-    @if (myControl.value) {
-      <div class="create-list">
-        <button mat-fab extended>
-          <mat-icon>add_shopping_cart</mat-icon>
-          Create list
-        </button>
-      </div>
-    }
+    <div class="create-list" [ngClass]="{'showing': myControl.value}">
+      <button mat-fab extended color="primary" type="button" (click)="console_stuff(myControl.value)">
+        <mat-icon>add_shopping_cart</mat-icon>
+        Create list for this store
+      </button>
+    </div>
   </form>
 </div>

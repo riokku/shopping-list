@@ -18,7 +18,13 @@
 .create-list{
   display: grid;
   place-items: center;
+  visibility: hidden;
+  &.showing{
+    visibility: inherit;
+  }
 }
+
+
 
 .store-selection-wrapper{
   padding: 1rem;
