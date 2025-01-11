@@ -10,15 +10,27 @@
              [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete">
         @for (store of filteredOptions | async; track store) {
-          <mat-option [value]="store.storeGUID">{{store.storeName}}</mat-option>
+          <mat-option [value]="store.storeGUID">
+            <div class="row store-selection-wrapper">
+              <div class="col-4">
+                <img src="{{store.storeLogo}}" alt="{{store.storeName}}">
+              </div>
+              <div class="col-8">
+                <strong>{{store.storeName}}</strong><br />
+                {{store.storeLocationStreet}}, {{store.storeLocationTown}}, {{store.storeLocationState}}
+              </div>
+            </div>
+          </mat-option>
         }
       </mat-autocomplete>
     </mat-form-field>
-    <div class="create-list">
-      <button mat-fab extended>
-        <mat-icon>favorite</mat-icon>
-        Basic
-      </button>
-    </div>
+    @if (myControl.value) {
+      <div class="create-list">
+        <button mat-fab extended>
+          <mat-icon>add_shopping_cart</mat-icon>
+          Create list
+        </button>
+      </div>
+    }
   </form>
 </div>
