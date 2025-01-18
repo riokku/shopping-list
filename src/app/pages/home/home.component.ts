@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit{
   }
 
   constructor(){
-    this.storeList = this.listDataDefaultService.getItems();
+    this.storeList = this.listDataDefaultService.getStores();
   }
 
 }

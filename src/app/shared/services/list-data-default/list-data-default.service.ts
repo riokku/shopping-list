@@ -89,8 +89,12 @@ export class ListDataDefaultService {
   constructor() { }
 
 
-  getItems(): StoreModel[]{
+  getStores(): StoreModel[]{
     return this.stores;
+  }
+
+  getSpecificStore(incomingStoreGuid:string | undefined): StoreModel | undefined{
+    return this.stores.find(store => store.storeGUID === incomingStoreGuid);
   }
 
 
