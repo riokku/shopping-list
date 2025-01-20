@@ -6,7 +6,7 @@
              placeholder="Pick one"
              aria-label="Where are you shopping?"
              matInput
-             [formControl]="myControl"
+             [formControl]="storeControl"
              [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedStore">
         @for (store of filteredOptions | async; track store) {
@@ -24,8 +24,8 @@
         }
       </mat-autocomplete>
     </mat-form-field>
-    <div class="create-list" [ngClass]="{'showing': myControl.value}">
-      <button mat-fab extended color="primary" type="button" (click)="console_stuff(myControl.value)">
+    <div class="create-list" [ngClass]="{'showing': storeControl.value}">
+      <button mat-fab extended color="primary" type="button" (click)="generateList(storeControl.value)">
         <mat-icon>add_shopping_cart</mat-icon>
         Create list for this store
       </button>

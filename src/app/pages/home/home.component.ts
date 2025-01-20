@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatIcon } from '@angular/material/icon';
 import { StoreModel } from '../../shared/models/store.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -32,31 +33,35 @@ export class HomeComponent implements OnInit{
   storeList: StoreModel[] = [];
   listDataDefaultService: ListDataDefaultService = inject(ListDataDefaultService);
 
-  myControl = new FormControl('');
+  storeControl = new FormControl('');
   filteredOptions!: Observable<StoreModel[]>;
 
+  constructor(
+    private router: Router
+  ){
+    this.storeList = this.listDataDefaultService.getStores()
+  }
+
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredOptions = this.storeControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value || '')),
+      map(value => this.filterStores(value || '')),
     );
   }
 
-  private _filter(storeName: string): StoreModel[] {
-    const filterValue = storeName.toLowerCase();
+  private filterStores(incomingStoreName: string): StoreModel[] {
+    const filterValue = incomingStoreName.toString().toLowerCase();
     return this.storeList.filter(store => store.storeName.toLowerCase().includes(filterValue));
   }
 
-  console_stuff(info:any){
-    console.log(info);
+  generateList(incomginStore: any){
+    this.router.navigate([`create-list/${incomginStore.storeGUID}`])
   }
 
   displaySelectedStore(store: StoreModel): string {
     return store ? `${store.storeName} (${store.storeLocationStreet}, ${store.storeLocationTown}, ${store.storeLocationState})` : '';
   }
 
-  constructor(){
-    this.storeList = this.listDataDefaultService.getStores();
-  }
+
 
 }
