@@ -11,5 +11,31 @@
         </h3>
       </div>
     </div>
+    <div class="row">
+      <div class="col-12">
+        <form class="store-item-picker-form">
+          <mat-form-field class="form-field-full-width">
+            <mat-label>What are you shopping for?</mat-label>
+            <input type="text"
+            placeholder="Pick one"
+            aria-label="Where are you shopping?"
+            matInput
+            [formControl]="storeItemsControl"
+            [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedItem">
+              @for (storeItem of selectedStore?.storeIitems; track storeItem) {
+                <mat-option [value]="storeItem">
+                  <div class="row store-selection-wrapper">
+                    <div class="col-12">
+                      <strong>{{storeItem.name}}</strong> (aisle: {{ storeItem.aisle}})
+                    </div>
+                  </div>
+                </mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
