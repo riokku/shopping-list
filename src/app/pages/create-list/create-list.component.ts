@@ -30,12 +30,28 @@ export class CreateListComponent {
 
   storeItemsControl = new FormControl('');
   filteredOptions!: Observable<StoreModel[]>;
+  selectedItems: any[] = []; // Array to store selected items
 
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe((params: Params) => {
       this.storeGUID = params['guid'];
       this.selectedStore = this.listDataDefaultService.getSpecificStore(this.storeGUID);
     });
+
+
+    this.storeItemsControl.valueChanges.subscribe((selectedItem) => {
+      if (selectedItem) {
+        this.addItem(selectedItem);
+      }
+    });
+  }
+
+  addItem(item: any): void {
+    // Check if the item is already added
+    const isAlreadyAdded = this.selectedItems.some((i) => i.name === item.name);
+    if (!isAlreadyAdded) {
+      this.selectedItems.push(item);
+    }
   }
 
   displaySelectedItem(item: StoreItemModel): string {
