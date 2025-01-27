@@ -13,14 +13,24 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <form class="store-item-picker-form">
+        <div>
+          <button mat-fab extended color="primary" type="button">
+            <mat-icon>add_box</mat-icon>
+            Add item
+          </button>
+        </div>
+        <form [formGroup]="shoppingForm" class="store-item-picker-form p-4" (ngSubmit)="onSubmit()">
+          <h3 class="mb-3">
+            Add an item to your list:
+          </h3>
           <mat-form-field class="form-field-full-width">
             <mat-label>What are you shopping for?</mat-label>
             <input type="text"
             placeholder="Pick one"
             aria-label="Where are you shopping?"
             matInput
-            [formControl]="storeItemsControl"
+            formControlName="item"
+            name="item"
             [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedItem">
               @for (storeItem of selectedStore?.storeIitems; track storeItem) {
@@ -34,6 +44,17 @@
               }
             </mat-autocomplete>
           </mat-form-field>
+          <mat-form-field class="form-field-full-width">
+            <mat-label>Quantity and/or size</mat-label>
+            <input matInput formControlName="quantity">
+          </mat-form-field>
+          <mat-form-field class="form-field-full-width">
+            <mat-label>Notes</mat-label>
+            <textarea matInput formControlName="notes"></textarea>
+          </mat-form-field>
+          <button mat-flat-button color="accent" type="submit">
+            Basic
+          </button>
         </form>
       </div>
       <div class="col-6">
@@ -41,7 +62,10 @@
         <hr>
         <ul>
           <li *ngFor="let item of selectedItems">
-            {{ item.name }} (Aisle: {{ item.aisle }})
+            {{item.item.name}}<br />
+            (Aisle: {{item.item.aisle}})<br />
+            {{item.quantity}}<br />
+            {{item.notes}}
           </li>
         </ul>
       </div>
