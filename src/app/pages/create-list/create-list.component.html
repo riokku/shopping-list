@@ -33,7 +33,7 @@
             name="item"
             [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedItem">
-              @for (storeItem of selectedStore?.storeIitems; track storeItem) {
+              @for (storeItem of selectedStore?.storeItems; track storeItem) {
                 <mat-option [value]="storeItem">
                   <div class="row store-selection-wrapper">
                     <div class="col-12">
