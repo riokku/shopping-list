@@ -20,6 +20,7 @@ export class SupabaseService {
   }
 
   get authState$() {
+    console.log('asdlkf');
     return this.authState.asObservable();
   }
 
