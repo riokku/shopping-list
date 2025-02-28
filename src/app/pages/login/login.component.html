@@ -1,15 +1,61 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-  <mat-form-field appearance="outline">
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" type="email" required>
-    <mat-error *ngIf="loginForm.get('email')?.invalid">Invalid email</mat-error>
-  </mat-form-field>
+<div class="page-wrapper">
+  <div class="row">
+    <div class="col-12">
+      <button type=button (click)="switchMode()">
+        Switch sign in/up mode
+      </button>
+    </div>
+  </div>
+  <div class="row" *ngIf="!loggedIn">
+    <div class="col-12">
+      <h1>
+        Sign Up
+      </h1>
+      <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+        <mat-card>
+          <mat-card-title>Sign Up</mat-card-title>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Password</mat-label>
-    <input matInput formControlName="password" type="password" required>
-    <mat-error *ngIf="loginForm.get('password')?.invalid">Password is required</mat-error>
-  </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" required>
+            <mat-error *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+              Valid email is required
+            </mat-error>
+          </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
-</form>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" required>
+            <mat-error *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+              Password is required (min 6 characters)
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">
+            Sign Up
+          </button>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+  <div class="row" *ngIf="loggedIn">
+    <div class="col-12">
+      <h1>
+        Login
+      </h1>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" required>
+          <mat-error *ngIf="loginForm.get('email')?.invalid">Invalid email</mat-error>
+        </mat-form-field><br />
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" required>
+          <mat-error *ngIf="loginForm.get('password')?.invalid">Password is required</mat-error>
+        </mat-form-field><br />
+        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
