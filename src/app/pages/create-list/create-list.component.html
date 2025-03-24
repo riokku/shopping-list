@@ -1,24 +1,23 @@
 <section>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
-        <img src="{{selectedStore?.storeLogo}}" alt="{{selectedStore?.storeName}}">
-        <h1>
-          {{selectedStore?.storeName}}
-        </h1>
-        <h3>
-          {{selectedStore?.storeLocationStreet}}, {{selectedStore?.storeLocationTown}}, {{selectedStore?.storeLocationState}}
-        </h3>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <div>
-          <button mat-fab extended color="primary" type="button">
-            <mat-icon>add_box</mat-icon>
-            Add item
-          </button>
+      <div class="col-12 col-md-4">
+        <p class="fw-bold fs-4">
+          Selected store:
+        </p>
+        <div class="store-info-wrapper">
+          <img src="{{selectedStore?.storeLogo}}" alt="{{selectedStore?.storeName}}">
+          <div class="ps-3">
+            <h1>
+              {{selectedStore?.storeName}}
+            </h1>
+            <h3>
+              {{selectedStore?.storeLocationStreet}}, {{selectedStore?.storeLocationTown}}, {{selectedStore?.storeLocationState}}
+            </h3>
+          </div>
         </div>
+      </div>
+      <div class="col-12 col-md-4">
         <form [formGroup]="shoppingForm" class="store-item-picker-form p-4" (ngSubmit)="onSubmit()">
           <h3 class="mb-3">
             Add an item to your list:
@@ -31,7 +30,8 @@
             matInput
             formControlName="item"
             name="item"
-            [matAutocomplete]="auto">
+            [matAutocomplete]="auto"
+            required>
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedItem">
               @for (storeItem of selectedStore?.storeItems; track storeItem) {
                 <mat-option [value]="storeItem">
@@ -43,21 +43,28 @@
                 </mat-option>
               }
             </mat-autocomplete>
+            <mat-error *ngIf="shoppingForm.get('item')?.hasError('required')">
+              Item is required
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="form-field-full-width">
             <mat-label>Quantity and/or size</mat-label>
-            <input matInput formControlName="quantity">
+            <input matInput formControlName="quantity" required>
+            <mat-error *ngIf="shoppingForm.get('quantity')?.hasError('required')">
+              Quantity/size is required
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="form-field-full-width">
             <mat-label>Notes</mat-label>
             <textarea matInput formControlName="notes"></textarea>
           </mat-form-field>
-          <button mat-flat-button color="accent" type="submit">
-            Basic
+          <button mat-fab extended color="primary" type="submit" [disabled]="shoppingForm.invalid">
+            <mat-icon>add_box</mat-icon>
+            Add item
           </button>
         </form>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-4">
         <h3>Selected Items:</h3>
         <hr>
         <ul>

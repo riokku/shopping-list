@@ -66,6 +66,7 @@ export class CreateListComponent {
     const isAlreadyAdded = this.selectedItems.some((i) => i.item.name === this.shoppingForm.value.item.name);
     if (!isAlreadyAdded) {
       this.selectedItems.push(this.shoppingForm.value);
+      this.shoppingForm.reset();
     }
     console.log(this.shoppingForm.value.name);
 
