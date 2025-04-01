@@ -2,77 +2,103 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-md-4">
-        <p class="fw-bold fs-4">
-          Selected store:
-        </p>
-        <div class="store-info-wrapper">
-          <img src="{{selectedStore?.storeLogo}}" alt="{{selectedStore?.storeName}}">
-          <div class="ps-3">
-            <h1>
-              {{selectedStore?.storeName}}
-            </h1>
-            <h3>
-              {{selectedStore?.storeLocationStreet}}, {{selectedStore?.storeLocationTown}}, {{selectedStore?.storeLocationState}}
-            </h3>
+        <div class="store-wrapper">
+          <div class="selected-label">
+            <p class="fs-4 m-0 p-0">
+              Selected store:
+            </p>
+          </div>
+          <div class="store-info-wrapper">
+            <div>
+              <h1>
+                {{selectedStore?.storeName}}
+              </h1>
+              <h3>
+                {{selectedStore?.storeLocationStreet}}, {{selectedStore?.storeLocationTown}}, {{selectedStore?.storeLocationState}}
+              </h3>
+            </div>
+            <div>
+              <img src="{{selectedStore?.storeLogo}}" alt="{{selectedStore?.storeName}}">
+            </div>
+          </div>
+          <div class="list-label">
+            <p class="fs-5 m-0 p-0">
+              Add an item to your list:
+            </p>
+          </div>
+          <div class="submit-form-wrapper">
+            <form [formGroup]="shoppingForm" class="store-item-picker-form p-4" (ngSubmit)="onSubmit()">
+              <mat-form-field class="form-field-full-width">
+                <mat-label>What are you shopping for?</mat-label>
+                <input type="text"
+                placeholder="Pick one"
+                aria-label="Where are you shopping?"
+                matInput
+                formControlName="item"
+                name="item"
+                [matAutocomplete]="auto"
+                required>
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedItem">
+                  @for (storeItem of selectedStore?.storeItems; track storeItem) {
+                    <mat-option [value]="storeItem">
+                      <div class="row store-selection-wrapper">
+                        <div class="col-12">
+                          <strong>{{storeItem.name}}</strong> (aisle: {{ storeItem.aisle}})
+                        </div>
+                      </div>
+                    </mat-option>
+                  }
+                </mat-autocomplete>
+                <mat-error *ngIf="shoppingForm.get('item')?.hasError('required')">
+                  Item is required
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field-full-width">
+                <mat-label>Quantity and/or size</mat-label>
+                <input matInput formControlName="quantity" required>
+                <mat-error *ngIf="shoppingForm.get('quantity')?.hasError('required')">
+                  Quantity/size is required
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="form-field-full-width">
+                <mat-label>Notes</mat-label>
+                <textarea matInput formControlName="notes"></textarea>
+              </mat-form-field>
+              <button mat-fab extended color="primary" type="submit" [disabled]="shoppingForm.invalid">
+                <mat-icon>add_box</mat-icon>
+                Add item
+              </button>
+            </form>
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-4">
-        <form [formGroup]="shoppingForm" class="store-item-picker-form p-4" (ngSubmit)="onSubmit()">
-          <h3 class="mb-3">
-            Add an item to your list:
+      <div class="col-12 col-md-4 col-lg-6">
+        <div class="selected-list-header">
+          <h3>
+            Your list:
           </h3>
-          <mat-form-field class="form-field-full-width">
-            <mat-label>What are you shopping for?</mat-label>
-            <input type="text"
-            placeholder="Pick one"
-            aria-label="Where are you shopping?"
-            matInput
-            formControlName="item"
-            name="item"
-            [matAutocomplete]="auto"
-            required>
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedItem">
-              @for (storeItem of selectedStore?.storeItems; track storeItem) {
-                <mat-option [value]="storeItem">
-                  <div class="row store-selection-wrapper">
-                    <div class="col-12">
-                      <strong>{{storeItem.name}}</strong> (aisle: {{ storeItem.aisle}})
-                    </div>
-                  </div>
-                </mat-option>
-              }
-            </mat-autocomplete>
-            <mat-error *ngIf="shoppingForm.get('item')?.hasError('required')">
-              Item is required
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="form-field-full-width">
-            <mat-label>Quantity and/or size</mat-label>
-            <input matInput formControlName="quantity" required>
-            <mat-error *ngIf="shoppingForm.get('quantity')?.hasError('required')">
-              Quantity/size is required
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="form-field-full-width">
-            <mat-label>Notes</mat-label>
-            <textarea matInput formControlName="notes"></textarea>
-          </mat-form-field>
-          <button mat-fab extended color="primary" type="submit" [disabled]="shoppingForm.invalid">
-            <mat-icon>add_box</mat-icon>
-            Add item
+          <button mat-fab extended color="accent" type="button" [disabled]="selectedItems.length > 0">
+            <mat-icon>data_saver_on</mat-icon>
+            Finalize list
           </button>
-        </form>
-      </div>
-      <div class="col-12 col-md-4">
-        <h3>Selected Items:</h3>
+        </div>
         <hr>
-        <ul>
+        <ul class="selected-item-list">
           <li *ngFor="let item of selectedItems">
-            {{item.item.name}}<br />
-            (Aisle: {{item.item.aisle}})<br />
-            {{item.quantity}}<br />
-            {{item.notes}}
+            <div class="in-list-item-details">
+              <strong>{{item.item.name}}</strong>
+              (Aisle: {{item.item.aisle}})<br />
+              Quantity: {{item.quantity}}<br />
+              Notes: {{item.notes}}
+            </div>
+            <div class="in-list-item-actions">
+              <button mat-mini-fab aria-label="edit item" color="primary" class="me-2">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-mini-fab aria-label="delete item" (click)="deleteItem(item)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </li>
         </ul>
       </div>

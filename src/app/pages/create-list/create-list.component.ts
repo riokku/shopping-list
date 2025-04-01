@@ -62,6 +62,12 @@ export class CreateListComponent {
     }
   }
 
+  deleteItem(item:ShoppingListItemModel): void{
+    const itemIndex = this.selectedItems.indexOf(item);
+    this.selectedItems.splice(itemIndex, 1);
+  }
+
+
   onSubmit(){
     const isAlreadyAdded = this.selectedItems.some((i) => i.item.name === this.shoppingForm.value.item.name);
     if (!isAlreadyAdded) {
