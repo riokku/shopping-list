@@ -14,7 +14,6 @@
       <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
         <mat-card>
           <mat-card-title>Sign Up</mat-card-title>
-
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Email</mat-label>
             <input matInput type="email" formControlName="email" required>
@@ -22,7 +21,6 @@
               Valid email is required
             </mat-error>
           </mat-form-field>
-
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Password</mat-label>
             <input matInput type="password" formControlName="password" required>
@@ -30,7 +28,6 @@
               Password is required (min 6 characters)
             </mat-error>
           </mat-form-field>
-
           <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">
             Sign Up
           </button>

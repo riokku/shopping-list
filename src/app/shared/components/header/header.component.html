@@ -3,29 +3,22 @@
 
   <!-- Desktop Navigation -->
   <div class="desktop-nav" *ngIf="!(isHandset$ | async)">
-    <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-    <a mat-button routerLink="/my-lists" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Lists</a>
+    <div>
+      <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a *ngIf="activeSession" mat-button routerLink="/my-lists" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Lists</a>
+    </div>
+    <div>
+      <div>
+        <button *ngIf="activeSession" mat-icon-button matTooltip="Logout" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+        <a *ngIf="!activeSession" mat-button [routerLink]="'/login'" class="login-link">
+          <mat-icon>login</mat-icon>
+          Login / Sign Up
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- Responsive spacer -->
   <span class="spacer"></span>
-
-  <!-- User menu (optional) -->
-  <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-menu">
-    <mat-icon>account_circle</mat-icon>
-  </button>
-  <mat-menu #userMenu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>person</mat-icon>
-      <span>Profile</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>settings</mat-icon>
-      <span>Settings</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>logout</mat-icon>
-      <span>Logout</span>
-    </button>
-  </mat-menu>
-</mat-toolbar>

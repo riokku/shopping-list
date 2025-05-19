@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { SupabaseService } from '../../shared/services/supa/supa.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -29,8 +30,13 @@ export class LoginComponent {
   loginForm: FormGroup;
   signUpForm: FormGroup;
   public loggedIn: boolean = false;
+  private errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private supaService: SupabaseService) {
+  constructor(
+    private fb: FormBuilder,
+    private supaService: SupabaseService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -58,16 +64,23 @@ export class LoginComponent {
   }
 
   async login() {
-    if (this.loginForm.invalid) return;
+    this.errorMessage = '';
+
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
     const { email, password } = this.loginForm.value;
 
-    // const { error } = await this.supaService.signIn(email, password);
-
-    // if (error) {
-    //   this.snackBar.open(error.message, 'Close', { duration: 3000 });
-    // } else {
-    //   this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
-    // }
+    try {
+      const result = await this.supaService.signIn(email, password);
+      console.log('Login successful:', result);
+      this.router.navigate(['/']); // Redirect on success
+    } catch (error: any) {
+      console.error('Login error:', error);
+      this.errorMessage = error.message || 'Login failed';
+    }
   }
 }
 

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ShoppingListModel } from '../../models/shopping-list.model';
 import { StoreModel } from '../../models/store.model';
 
 @Injectable({
@@ -131,7 +130,6 @@ export class ListDataDefaultService {
     }
   ]
 
-
   public items: string[] = [
     "Apples",
     "Bananas",
@@ -173,9 +171,7 @@ export class ListDataDefaultService {
     "Laundry Detergent"
   ]
 
-
   constructor() { }
-
 
   getStores(): StoreModel[]{
     return this.stores;

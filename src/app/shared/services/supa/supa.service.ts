@@ -10,8 +10,14 @@ export class SupabaseService {
   private supabase: SupabaseClient;
   private authState = new BehaviorSubject<Session | null>(null);
 
+  session$ = this.authState.asObservable();
+
   constructor() {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseAnonKey);
+
+    this.supabase.auth.getSession().then(({ data }) => {
+      this.authState.next(data.session);
+    });
 
     // Listen for auth state changes
     this.supabase.auth.onAuthStateChange((event: AuthChangeEvent, session: Session | null) => {

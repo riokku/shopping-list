@@ -9,7 +9,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
+import { Session } from '@supabase/supabase-js';
+import { SupabaseService } from '../../services/supa/supa.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -31,8 +33,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
   private readonly breakpointObserver: BreakpointObserver;
   isHandset$: Observable<boolean>;
+  activeSession: Session | null = null;
 
-  constructor(breakpointObserver: BreakpointObserver) {
+  constructor(
+    breakpointObserver: BreakpointObserver,
+    private supaService: SupabaseService,
+    private router: Router
+  ) {
     this.breakpointObserver = breakpointObserver;
     this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
@@ -40,4 +47,14 @@ export class HeaderComponent {
         shareReplay()
       );
   }
+
+  ngOnInit() {
+    this.supaService.session$.subscribe(session => this.activeSession = session);
+  }
+
+  async logout() {
+    await this.supaService.signOut();
+    this.router.navigate(['/login']);
+  }
+
 }
