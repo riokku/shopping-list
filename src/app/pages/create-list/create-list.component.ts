@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { StoreModel } from '../../shared/models/store.model';
 import { ListDataDefaultService } from '../../shared/services/list-data-default/list-data-default.service';
 import { StoreItemModel } from '../../shared/models/store-item.model';
 import { Observable } from 'rxjs';
-import { FormsModule, FormControl, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { FormsModule, FormControl, ReactiveFormsModule, FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { CommonModule } from '@angular/common';
@@ -32,6 +32,8 @@ export class CreateListComponent {
   public selectedStore: StoreModel | undefined;
   public selectedStoreItems: StoreItemModel[] | undefined;
   public listDataDefaultService: ListDataDefaultService = inject(ListDataDefaultService);
+
+  @ViewChild('formElement') formElement!: NgForm;
 
   public showAddItemForm: boolean = false;
 
@@ -67,15 +69,15 @@ export class CreateListComponent {
     this.selectedItems.splice(itemIndex, 1);
   }
 
-
-  onSubmit(){
+  onSubmit() {
     const isAlreadyAdded = this.selectedItems.some((i) => i.item.name === this.shoppingForm.value.item.name);
     if (!isAlreadyAdded) {
       this.selectedItems.push(this.shoppingForm.value);
-      this.shoppingForm.reset();
-    }
-    console.log(this.shoppingForm.value.name);
+      this.formElement.resetForm();
 
+    } else {
+      alert("This item appears to be in your list already");
+    }
   }
 
   displaySelectedItem(item: StoreItemModel): string {
