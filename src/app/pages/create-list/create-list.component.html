@@ -64,9 +64,17 @@
                 <mat-label>Notes</mat-label>
                 <textarea matInput formControlName="notes"></textarea>
               </mat-form-field>
-              <button mat-fab extended color="primary" type="submit" [disabled]="shoppingForm.invalid">
+              <button mat-fab extended color="primary" type="submit" [disabled]="shoppingForm.invalid" *ngIf="!isEditing()">
                 <mat-icon>add_box</mat-icon>
                 Add item
+              </button>
+              <button mat-fab extended color="primary" type="button" [disabled]="shoppingForm.invalid" *ngIf="isEditing()">
+                <mat-icon>sync</mat-icon>
+                Update item
+              </button>
+              <button mat-fab extended color="accent" type="button" [disabled]="shoppingForm.invalid" *ngIf="isEditing()" (click)="cancelUpdate()">
+                <mat-icon>cancel</mat-icon>
+                Cancel item
               </button>
             </form>
           </div>
@@ -84,18 +92,18 @@
         </div>
         <hr>
         <ul class="selected-item-list">
-          <li *ngFor="let item of selectedItems">
+          <li *ngFor="let selectedItem of selectedItems">
             <div class="in-list-item-details">
-              <strong>{{item.item.name}}</strong>
-              (Aisle: {{item.item.aisle}})<br />
-              Quantity: {{item.quantity}}<br />
-              Notes: {{item.notes}}
+              <strong>{{selectedItem.item.name}}</strong>
+              (Aisle: {{selectedItem.item.aisle}})<br />
+              Quantity: {{selectedItem.quantity}}<br />
+              Notes: {{selectedItem.notes}}
             </div>
             <div class="in-list-item-actions">
-              <button mat-mini-fab aria-label="edit item" color="primary" class="me-2">
+              <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" (click)="updateItem(selectedItem)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-mini-fab aria-label="delete item" (click)="deleteItem(item)">
+              <button mat-mini-fab aria-label="delete item" (click)="deleteItem(selectedItem)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>

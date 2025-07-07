@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild, Signal, signal } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { StoreModel } from '../../shared/models/store.model';
 import { ListDataDefaultService } from '../../shared/services/list-data-default/list-data-default.service';
@@ -30,12 +30,12 @@ import { ShoppingListItemModel } from '../../shared/models/shopping-list-item.mo
 export class CreateListComponent {
   public storeGUID: string | undefined;
   public selectedStore: StoreModel | undefined;
-  public selectedStoreItems: StoreItemModel[] | undefined;
   public listDataDefaultService: ListDataDefaultService = inject(ListDataDefaultService);
 
   @ViewChild('formElement') formElement!: NgForm;
 
-  public showAddItemForm: boolean = false;
+  //State management
+  isEditing = signal(false);
 
   shoppingForm: FormGroup;
 
@@ -56,11 +56,13 @@ export class CreateListComponent {
     })
   }
 
-  addItem(item: ShoppingListItemModel): void {
-    // Check if the item is already added
-    const isAlreadyAdded = this.selectedItems.some((i) => i.name === item.name);
+  onSubmit() {
+    const isAlreadyAdded = this.selectedItems.some((i) => i.item.name === this.shoppingForm.value.item.name);
     if (!isAlreadyAdded) {
-      this.selectedItems.push(item);
+      this.selectedItems.push(this.shoppingForm.value);
+      this.formElement.resetForm();
+    } else {
+      alert("This item appears to be in your list already");
     }
   }
 
@@ -69,16 +71,33 @@ export class CreateListComponent {
     this.selectedItems.splice(itemIndex, 1);
   }
 
-  onSubmit() {
-    const isAlreadyAdded = this.selectedItems.some((i) => i.item.name === this.shoppingForm.value.item.name);
-    if (!isAlreadyAdded) {
-      this.selectedItems.push(this.shoppingForm.value);
-      this.formElement.resetForm();
+  updateItem(itemToUpdate: ShoppingListItemModel): void {
+    //Reset form and update state
+    this.formElement.resetForm();
+    this.isEditing.set(true);
 
-    } else {
-      alert("This item appears to be in your list already");
+    // Look for the StoreItemModel matching the saved name
+    const matchingStoreItem = this.selectedStore?.storeItems.find(
+      storeItem => storeItem.name === itemToUpdate.item.name
+    );
+
+    if (!matchingStoreItem) {
+      console.warn('No matching store item found for:', itemToUpdate.item.name);
+      return;
     }
+
+    this.shoppingForm.setValue({
+      item: matchingStoreItem,
+      quantity: itemToUpdate.quantity,
+      notes: itemToUpdate.notes
+    });
   }
+
+  cancelUpdate(){
+    this.formElement.resetForm();
+    this.isEditing.set(false)
+  }
+
 
   displaySelectedItem(item: StoreItemModel): string {
     return item ? `${item.name} (${item.aisle})` : '';

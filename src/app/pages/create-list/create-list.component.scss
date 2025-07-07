@@ -63,12 +63,18 @@
   li{
     background-color:lemonchiffon;
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     &:not(:first-child){
       margin-top: 0.5rem;
     }
+  }
+}
+
+form{
+  button > .mat-icon{
+    margin-right: 6px
   }
 }

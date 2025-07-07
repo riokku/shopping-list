@@ -1,6 +1,7 @@
+import { StoreItemModel } from "./store-item.model";
+
 export interface ShoppingListItemModel {
-  name: string,
+  item: StoreItemModel,
   quantity: string,
-  aisle: string | number,
   notes: string
 }
