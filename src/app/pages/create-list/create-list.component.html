@@ -68,7 +68,7 @@
                 <mat-icon>add_box</mat-icon>
                 Add item
               </button>
-              <button mat-fab extended color="primary" type="button" [disabled]="shoppingForm.invalid" *ngIf="isEditing()">
+              <button mat-fab extended color="primary" type="button" [disabled]="shoppingForm.invalid" *ngIf="isEditing()" (click)="updateItem()">
                 <mat-icon>sync</mat-icon>
                 Update item
               </button>
@@ -92,7 +92,7 @@
         </div>
         <hr>
         <ul class="selected-item-list">
-          <li *ngFor="let selectedItem of selectedItems">
+          <li *ngFor="let selectedItem of selectedItems; let i = index" [ngClass]="{'is-being-edited': isEditing()}">
             <div class="in-list-item-details">
               <strong>{{selectedItem.item.name}}</strong>
               (Aisle: {{selectedItem.item.aisle}})<br />
@@ -100,10 +100,10 @@
               Notes: {{selectedItem.notes}}
             </div>
             <div class="in-list-item-actions">
-              <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" (click)="updateItem(selectedItem)">
+              <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" [disabled]="isEditing()" (click)="setFormUpdateItem(selectedItem, i)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-mini-fab aria-label="delete item" (click)="deleteItem(selectedItem)">
+              <button mat-mini-fab aria-label="delete item" [disabled]="isEditing()" (click)="deleteItem(selectedItem)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>

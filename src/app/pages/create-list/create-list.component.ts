@@ -36,6 +36,7 @@ export class CreateListComponent {
 
   //State management
   isEditing = signal(false);
+  itemToUpdateIndex: number | null = null;
 
   shoppingForm: FormGroup;
 
@@ -71,26 +72,49 @@ export class CreateListComponent {
     this.selectedItems.splice(itemIndex, 1);
   }
 
-  updateItem(itemToUpdate: ShoppingListItemModel): void {
+  setFormUpdateItem(updateItem: ShoppingListItemModel, updateItemIndex: number): void {
     //Reset form and update state
     this.formElement.resetForm();
     this.isEditing.set(true);
 
     // Look for the StoreItemModel matching the saved name
     const matchingStoreItem = this.selectedStore?.storeItems.find(
-      storeItem => storeItem.name === itemToUpdate.item.name
+      storeItem => storeItem.name === updateItem.item.name
     );
 
     if (!matchingStoreItem) {
-      console.warn('No matching store item found for:', itemToUpdate.item.name);
+      console.warn('No matching store item found for:', updateItem.item.name);
       return;
     }
 
     this.shoppingForm.setValue({
       item: matchingStoreItem,
-      quantity: itemToUpdate.quantity,
-      notes: itemToUpdate.notes
+      quantity: updateItem.quantity,
+      notes: updateItem.notes
     });
+
+    this.itemToUpdateIndex = updateItemIndex;
+  }
+
+  updateItem(){
+    if (this.itemToUpdateIndex === null) {
+      console.warn('No item is currently being edited');
+      return;
+    }
+
+    const updatedItem: ShoppingListItemModel = {
+      item: this.shoppingForm.value.item,
+      quantity: this.shoppingForm.value.quantity,
+      notes: this.shoppingForm.value.notes
+    };
+
+    // Update the item at the stored index
+    this.selectedItems[this.itemToUpdateIndex] = updatedItem;
+
+    // Reset editing state
+    this.isEditing.set(false);
+    this.itemToUpdateIndex = null;
+    this.formElement.resetForm();
   }
 
   cancelUpdate(){
