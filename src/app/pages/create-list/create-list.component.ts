@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ShoppingListItemModel } from '../../shared/models/shopping-list-item.model';
+import { SupabaseService } from '../../shared/services/supa/supa.service';
 
 @Component({
   selector: 'app-create-list',
@@ -44,7 +45,7 @@ export class CreateListComponent {
   filteredOptions!: Observable<StoreModel[]>;
   selectedItems: any[] = []; // Array to store selected items
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) {
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private supaService: SupabaseService,) {
     this.route.params.subscribe((params: Params) => {
       this.storeGUID = params['guid'];
       this.selectedStore = this.listDataDefaultService.getSpecificStore(this.storeGUID);
@@ -122,7 +123,11 @@ export class CreateListComponent {
     this.isEditing.set(false)
   }
 
+  finalizeList(){
+    this.supaService.submitList(this.selectedStore?.storeName, this.selectedItems);
+  }
 
+  //Used to display selected items in list
   displaySelectedItem(item: StoreItemModel): string {
     return item ? `${item.name} (${item.aisle})` : '';
   }

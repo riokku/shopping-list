@@ -85,7 +85,7 @@
           <h3>
             Your list:
           </h3>
-          <button mat-fab extended color="accent" type="button" [disabled]="selectedItems.length === 0">
+          <button mat-fab extended color="accent" type="button" [disabled]="selectedItems.length === 0" (click)="finalizeList()">
             <mat-icon>data_saver_on</mat-icon>
             Finalize list
           </button>
@@ -97,7 +97,7 @@
               <strong>{{selectedItem.item.name}}</strong>
               (Aisle: {{selectedItem.item.aisle}})<br />
               Quantity: {{selectedItem.quantity}}<br />
-              Notes: {{selectedItem.notes}}
+              <span *ngIf="selectedItem.notes">Notes: {{selectedItem.notes}}</span>
             </div>
             <div class="in-list-item-actions">
               <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" [disabled]="isEditing()" (click)="setFormUpdateItem(selectedItem, i)">

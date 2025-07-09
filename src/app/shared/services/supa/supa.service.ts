@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient, AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { environment } from '../../../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
+import { ShoppingListItemModel } from '../../models/shopping-list-item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,6 @@ export class SupabaseService {
   }
 
   get authState$() {
-    console.log('asdlkf');
     return this.authState.asObservable();
   }
 
@@ -50,4 +50,33 @@ export class SupabaseService {
   getUser() {
     return this.supabase.auth.getUser();
   }
+
+  //Managing lists
+  async submitList(storeName: string | undefined, listItems:ShoppingListItemModel[]) {
+    const { data: userData, error: authError } = await this.supabase.auth.getUser();
+    const userId = userData?.user?.id;
+
+    if (!userId) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const { error } = await this.supabase.from('shopping_lists').insert([
+      {
+        user_id: userId,
+        store_name: storeName,
+        items: listItems
+      }
+    ]);
+
+    if (error) {
+      console.error('Error submitting list:', error.message);
+    } else {
+      console.log('Shopping list submitted!');
+      storeName = '';
+      listItems = [];
+    }
+  }
+
+
 }
