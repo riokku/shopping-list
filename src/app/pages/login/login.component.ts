@@ -59,13 +59,11 @@ export class LoginComponent {
       console.log(res);
     }).catch((err) => {
       console.log(err);
-
     })
   }
 
   async login() {
     this.errorMessage = '';
-
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -76,7 +74,7 @@ export class LoginComponent {
     try {
       const result = await this.supaService.signIn(email, password);
       console.log('Login successful:', result);
-      this.router.navigate(['/']); // Redirect on success
+      this.router.navigate(['/']);
     } catch (error: any) {
       console.error('Login error:', error);
       this.errorMessage = error.message || 'Login failed';

@@ -1,1 +1,19 @@
-<p>my-lists works!</p>
+<!-- shopping-list-display.component.html -->
+<h2>Your Shopping Lists</h2>
+
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error">{{ error }}</div>
+<div *ngIf="!loading && shoppingLists.length === 0">No lists found.</div>
+
+<div *ngFor="let list of shoppingLists" class="list-card">
+  <h3>{{ list.store_name }}</h3>
+  <small>{{ list.created_at | date:'short' }}</small>
+
+  <ul>
+    <li *ngFor="let item of list.items">
+      Name: {{ item.item.name }}
+      Quantity: {{ item.quantity }}
+      Notes: {{ item.aisle }}
+    </li>
+  </ul>
+</div>

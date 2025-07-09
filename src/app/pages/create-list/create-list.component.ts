@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild, Signal, signal } from '@angular/core';
+import { Component, inject, ViewChild, signal } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { StoreModel } from '../../shared/models/store.model';
 import { ListDataDefaultService } from '../../shared/services/list-data-default/list-data-default.service';
@@ -45,7 +45,11 @@ export class CreateListComponent {
   filteredOptions!: Observable<StoreModel[]>;
   selectedItems: any[] = []; // Array to store selected items
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private supaService: SupabaseService,) {
+  constructor(
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private supaService: SupabaseService
+  ) {
     this.route.params.subscribe((params: Params) => {
       this.storeGUID = params['guid'];
       this.selectedStore = this.listDataDefaultService.getSpecificStore(this.storeGUID);
