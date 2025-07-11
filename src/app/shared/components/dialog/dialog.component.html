@@ -1,0 +1,16 @@
+<div class="backdrop">
+  <h2>
+    Who&rsquo;s creating this list?
+  </h2>
+  <p>
+    This name will be attached as the list creator when folks view your list. Feel free to use your first name or make something up!
+  </p>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Pick any name!</mat-label>
+    <input matInput name="author" [(ngModel)]="author">
+  </mat-form-field>
+  <button mat-fab extended color="accent" type="button" [disabled]="!author?.trim()" (click)="triggerSubmit()">
+    <mat-icon>rocket_launch</mat-icon>
+    All done!
+  </button>
+</div>

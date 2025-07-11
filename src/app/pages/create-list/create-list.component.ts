@@ -12,6 +12,8 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ShoppingListItemModel } from '../../shared/models/shopping-list-item.model';
 import { SupabaseService } from '../../shared/services/supa/supa.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-create-list',
@@ -48,7 +50,8 @@ export class CreateListComponent {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private supaService: SupabaseService
+    private supaService: SupabaseService,
+    private dialog: MatDialog
   ) {
     this.route.params.subscribe((params: Params) => {
       this.storeGUID = params['guid'];
@@ -128,7 +131,27 @@ export class CreateListComponent {
   }
 
   finalizeList(){
-    this.supaService.submitList(this.selectedStore?.storeName, this.selectedItems);
+  //  this.dialog.open(DialogComponent, {
+  //     width: '450px',
+  //     backdropClass: 'backdrop'
+  //   });
+
+  this.dialog.open(DialogComponent, {
+      width: '450px',
+       backdropClass: 'backdrop'
+  }).afterClosed().subscribe(author => {
+    if (author) {
+      this.submitList(author);
+    } else {
+      console.error("Issue getting author");
+    }
+  });
+
+  }
+
+
+  submitList(author: string){
+    this.supaService.submitList(this.selectedStore?.storeName, this.selectedItems, author);
   }
 
   //Used to display selected items in list

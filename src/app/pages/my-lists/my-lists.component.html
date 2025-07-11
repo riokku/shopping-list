@@ -13,7 +13,14 @@
     <li *ngFor="let item of list.items">
       Name: {{ item.item.name }}
       Quantity: {{ item.quantity }}
-      Notes: {{ item.aisle }}
+      Notes: {{ item.notes }}
     </li>
   </ul>
+</div>
+
+<div *ngFor="let list of shoppingLists" class="list-wrapper">
+  <a href="">
+    <h3>{{ list.store_name }}</h3>
+    <small>{{ list.created_at | date:'short' }}</small>
+  </a>
 </div>

@@ -53,7 +53,7 @@ export class SupabaseService {
   }
 
   //Managing lists
-  async submitList(storeName: string | undefined, listItems:ShoppingListItemModel[]) {
+  async submitList(storeName: string | undefined, listItems:ShoppingListItemModel[], author: string) {
     const { data: userData, error: authError } = await this.supabase.auth.getUser();
     const userId = userData?.user?.id;
 
@@ -66,7 +66,8 @@ export class SupabaseService {
       {
         user_id: userId,
         store_name: storeName,
-        items: listItems
+        items: listItems,
+        created_by_name: author
       }
     ]);
 

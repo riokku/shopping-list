@@ -1,0 +1,17 @@
+.list-wrapper{
+  background-color: indianred;
+  width: fit-content;
+  min-width: 200px;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  display: grid;
+  place-items: center;
+  &:hover{
+    background-color: rgb(199, 110, 110);
+  }
+  a{
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem 2rem;
+  }
+}
