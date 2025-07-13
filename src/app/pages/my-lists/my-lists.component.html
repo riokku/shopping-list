@@ -1,26 +1,20 @@
-<!-- shopping-list-display.component.html -->
-<h2>Your Shopping Lists</h2>
+<div class="shopping-lists-wrapper">
+  <h2>Your Shopping Lists</h2>
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error">{{ error }}</div>
+  <div *ngIf="!loading && shoppingLists.length === 0">No lists found.</div>
 
-<div *ngIf="loading">Loading...</div>
-<div *ngIf="error">{{ error }}</div>
-<div *ngIf="!loading && shoppingLists.length === 0">No lists found.</div>
-
-<div *ngFor="let list of shoppingLists" class="list-card">
-  <h3>{{ list.store_name }}</h3>
-  <small>{{ list.created_at | date:'short' }}</small>
-
-  <ul>
-    <li *ngFor="let item of list.items">
-      Name: {{ item.item.name }}
-      Quantity: {{ item.quantity }}
-      Notes: {{ item.notes }}
-    </li>
-  </ul>
-</div>
-
-<div *ngFor="let list of shoppingLists" class="list-wrapper">
-  <a href="">
-    <h3>{{ list.store_name }}</h3>
-    <small>{{ list.created_at | date:'short' }}</small>
-  </a>
+  <div *ngFor="let list of shoppingLists" class="list-wrapper">
+    <a href="/list/{{list.list_id}}">
+      <img src="{{list.store_logo}}" alt="{{list.store_name}}"/>
+      <div>
+        <p class="m-2">
+          {{list.store_address}}
+        </p>
+      </div>
+      <div>
+        <small>Created {{ list.created_at | date:'short' }} by {{ list.created_by_name }}</small>
+      </div>
+    </a>
+  </div>
 </div>

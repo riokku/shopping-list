@@ -1,0 +1,27 @@
+{{storeGUID}}<br />
+
+<div *ngIf="!listDetails">
+  This doesn't appear to be a valid list.
+</div>
+
+{{listDetails?.store_name}}<br />
+
+
+<div *ngFor="let item of listItems">
+  <strong>{{ item.item.name }}</strong> (Aisle: {{ item.item.aisle }})
+  - Qty: {{ item.quantity }}
+  <br />
+  <em>{{ item.notes }}</em>
+</div>
+
+<hr>
+<div *ngFor="let aisle of aisleOrder">
+  <ng-container *ngIf="groupedItems[aisle]?.length">
+    <h3>Aisle {{ aisle }}:</h3>
+    <ul>
+      <li *ngFor="let item of groupedItems[aisle]">
+        {{ item.item.name }} — Qty: {{ item.quantity }}
+      </li>
+    </ul>
+  </ng-container>
+</div>

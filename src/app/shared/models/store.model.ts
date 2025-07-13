@@ -7,5 +7,6 @@ export interface StoreModel {
   storeLocationState: string,
   storeLogo: string,
   storeGUID: string,
-  storeItems: StoreItemModel[]
+  storeItems: StoreItemModel[],
+  storeAisleOrder: string[]
 }

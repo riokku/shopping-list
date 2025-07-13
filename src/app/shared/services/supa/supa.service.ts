@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { ShoppingListItemModel } from '../../models/shopping-list-item.model';
 import { Router } from '@angular/router';
+import { StoreItemModel } from '../../models/store-item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -53,7 +54,7 @@ export class SupabaseService {
   }
 
   //Managing lists
-  async submitList(storeName: string | undefined, listItems:ShoppingListItemModel[], author: string) {
+  async submitList(storeName: string | undefined, storeAddress: string | undefined, storeLogo: string| undefined, listItems:ShoppingListItemModel[], author: string) {
     const { data: userData, error: authError } = await this.supabase.auth.getUser();
     const userId = userData?.user?.id;
 
@@ -66,6 +67,8 @@ export class SupabaseService {
       {
         user_id: userId,
         store_name: storeName,
+        store_address: storeAddress,
+        store_logo: storeLogo,
         items: listItems,
         created_by_name: author
       }
@@ -75,11 +78,11 @@ export class SupabaseService {
       console.error('Error submitting list:', error.message);
     } else {
       console.log('Shopping list submitted!');
-      this.router.navigate(['/']);
+      this.router.navigate(['/my-lists']);
     }
   }
 
-async getUserShoppingLists(): Promise<any[]> {
+  async getUserShoppingLists(): Promise<any[]> {
     const { data: userData, error: authError } = await this.supabase.auth.getUser();
     const userId = userData?.user?.id;
 
@@ -92,6 +95,21 @@ async getUserShoppingLists(): Promise<any[]> {
       .select('*')
       .eq('user_id', userId)
       .order('created_at', { ascending: false });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data ?? [];
+  }
+
+  async getSpecificList(listGUID: string | undefined): Promise<any[]> {
+
+    const { data, error } = await this.supabase
+      .from('shopping_lists')
+      .select('*')
+      .eq('list_id', listGUID)
+      .single();
 
     if (error) {
       throw new Error(error.message);

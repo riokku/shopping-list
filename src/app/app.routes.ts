@@ -4,6 +4,7 @@ import { MyListsComponent } from './pages/my-lists/my-lists.component';
 import { CreateListComponent } from './pages/create-list/create-list.component';
 import { StoreManagementComponent } from './pages/store-management/store-management.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ViewListComponent } from './pages/view-list/view-list.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,11 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     title: 'Authenticate'
+  },
+  {
+    path: 'list/:guid',
+    component: ViewListComponent,
+    title: 'Time to shop!'
   },
   {
     path: '**',

@@ -36,6 +36,9 @@ export class ListDataDefaultService {
           "name": "Chicken",
           "aisle": "Freezer Section"
         }
+      ],
+      "storeAisleOrder": [
+        "Produce", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "Freezer Section"
       ]
     },
     {
@@ -66,6 +69,9 @@ export class ListDataDefaultService {
           "name": "Cereal",
           "aisle": 5
         }
+      ],
+      "storeAisleOrder": [
+        "test"
       ]
     },
     {
@@ -96,6 +102,9 @@ export class ListDataDefaultService {
           "name": "Coffee",
           "aisle": 7
         }
+      ],
+      "storeAisleOrder": [
+        "test"
       ]
     },
     {
@@ -126,6 +135,9 @@ export class ListDataDefaultService {
           "name": "Pasta",
           "aisle": 4
         }
+      ],
+      "storeAisleOrder": [
+        "test"
       ]
     }
   ]
@@ -175,6 +187,13 @@ export class ListDataDefaultService {
 
   getStores(): StoreModel[]{
     return this.stores;
+  }
+
+  async getStoreAisleOrder(store: any): Promise<string[]>{
+    console.log(store);
+
+    const selectedStore = this.stores.find(s => s.storeName.toLowerCase() === store.toLowerCase());
+    return selectedStore?.storeAisleOrder ?? [];
   }
 
   getSpecificStore(incomingStoreGuid:string | undefined): StoreModel | undefined{

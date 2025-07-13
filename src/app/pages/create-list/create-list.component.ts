@@ -33,6 +33,7 @@ import { DialogComponent } from '../../shared/components/dialog/dialog.component
 export class CreateListComponent {
   public storeGUID: string | undefined;
   public selectedStore: StoreModel | undefined;
+  public selectedStoreAddress: string | undefined;
   public listDataDefaultService: ListDataDefaultService = inject(ListDataDefaultService);
 
   @ViewChild('formElement') formElement!: NgForm;
@@ -57,6 +58,8 @@ export class CreateListComponent {
       this.storeGUID = params['guid'];
       this.selectedStore = this.listDataDefaultService.getSpecificStore(this.storeGUID);
     });
+
+    this.selectedStoreAddress = `${this.selectedStore?.storeLocationStreet} ${this.selectedStore?.storeLocationTown}, ${this.selectedStore?.storeLocationState}`;
 
     this.shoppingForm = this.formBuilder.group({
       item: '',
@@ -131,27 +134,21 @@ export class CreateListComponent {
   }
 
   finalizeList(){
-  //  this.dialog.open(DialogComponent, {
-  //     width: '450px',
-  //     backdropClass: 'backdrop'
-  //   });
-
   this.dialog.open(DialogComponent, {
       width: '450px',
        backdropClass: 'backdrop'
-  }).afterClosed().subscribe(author => {
-    if (author) {
-      this.submitList(author);
-    } else {
-      console.error("Issue getting author");
-    }
-  });
-
+    }).afterClosed().subscribe(author => {
+      if (author) {
+        this.submitList(author);
+      } else {
+        console.error("Issue getting author");
+      }
+    });
   }
 
 
   submitList(author: string){
-    this.supaService.submitList(this.selectedStore?.storeName, this.selectedItems, author);
+    this.supaService.submitList(this.selectedStore?.storeName, this.selectedStoreAddress, this.selectedStore?.storeLogo, this.selectedItems, author);
   }
 
   //Used to display selected items in list
