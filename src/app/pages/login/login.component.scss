@@ -1,8 +1,14 @@
 .page-wrapper{
   padding: 5rem;
+  display: grid;
+  place-content: center;
 }
 
 mat-card{
   padding: 2rem;
-  max-width: 500px;
+  width: clamp(400px, 1000px, 500px);
+}
+
+button{
+  width: 100%;
 }

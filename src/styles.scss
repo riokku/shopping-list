@@ -9,3 +9,29 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
 }
+
+.mdc-snackbar__surface{
+  padding: 0 !important;
+}
+
+.success-snackbar .mat-mdc-simple-snack-bar{
+  background-color: darkgreen;
+  color: #fff;
+  border-radius: 0.5rem;
+  .mdc-button__label{
+    color: #fff;
+  }
+}
+
+.failed-snackbar .mat-mdc-simple-snack-bar{
+  background-color: darkred;
+  color: #fff;
+  border-radius: 0.5rem;
+  .mdc-button__label{
+    color: #fff;
+  }
+}
+
+
+//mdc-snackbar mat-mdc-snack-bar-container mdc-snackbar--open ng-tns-c495777134-4 ng-trigger ng-trigger-state success-snackbar ng-star-inserted
+// ng-tns-c495777134-5
