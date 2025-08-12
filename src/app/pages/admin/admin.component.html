@@ -12,10 +12,12 @@
         <h2>
           Safeway inventory catalogue:
         </h2>
-        <input type="text">
-        <button mat-mini-fab aria-label="edit item" color="primary" class="add-button" (click)="addItem()">
-          <mat-icon>add</mat-icon>
-        </button>
+        <div class="actions-wrapper">
+          <input type="text">
+          <button mat-mini-fab aria-label="edit item" color="primary" class="add-button" (click)="openDialog()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
     <div class="row mt-4">

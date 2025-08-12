@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { StoreItemModel } from '../../shared/models/store-item.model';
 import { SupabaseService } from '../../shared/services/supa/supa.service';
 import { CommonModule } from '@angular/common';
+import { AddInventoryDialogComponent } from '../../shared/components/add-inventory-dialog/add-inventory-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +20,8 @@ import { CommonModule } from '@angular/common';
 export class AdminComponent implements OnInit {
 
   constructor(
-    private supaService: SupabaseService
+    private supaService: SupabaseService,
+    private dialog: MatDialog
   ){}
 
   storeItems: any[] = [];
@@ -40,6 +42,14 @@ export class AdminComponent implements OnInit {
 
   deleteItem(){
     console.log('delete');
+  }
+
+  openDialog() {
+    this.dialog.open(AddInventoryDialogComponent, {
+      width: '650px',
+      backdropClass: 'backdrop',
+      data: { title: 'Edit Inventory Item' }
+    });
   }
 
 }

@@ -21,3 +21,13 @@ h1{
 .add-button{
   background-color: darkolivegreen;
 }
+
+.actions-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+::ng-deep .backdrop{
+  background-color: rgba(0, 0, 0, 0.8);
+}
