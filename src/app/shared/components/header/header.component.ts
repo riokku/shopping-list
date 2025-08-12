@@ -34,6 +34,7 @@ export class HeaderComponent {
   private readonly breakpointObserver: BreakpointObserver;
   isHandset$: Observable<boolean>;
   activeSession: Session | null = null;
+  isAdmin: boolean = false;
 
   constructor(
     breakpointObserver: BreakpointObserver,
@@ -48,8 +49,9 @@ export class HeaderComponent {
       );
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.supaService.session$.subscribe(session => this.activeSession = session);
+    this.isAdmin = await this.supaService.isAdmin();
   }
 
   async logout() {

@@ -1,0 +1,23 @@
+section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1{
+  border-bottom: 1px solid #666;
+  margin-bottom: 2rem;
+}
+
+.item-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: cornsilk;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.add-button{
+  background-color: darkolivegreen;
+}

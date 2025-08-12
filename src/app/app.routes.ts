@@ -5,6 +5,8 @@ import { CreateListComponent } from './pages/create-list/create-list.component';
 import { StoreManagementComponent } from './pages/store-management/store-management.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ViewListComponent } from './pages/view-list/view-list.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminGuard } from './shared/guards/admin/admin.guard';
 
 export const routes: Routes = [
   {
@@ -36,6 +38,12 @@ export const routes: Routes = [
     path: 'list/:guid',
     component: ViewListComponent,
     title: 'Time to shop!'
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AdminGuard],
+    title: 'Admin Dashboard'
   },
   {
     path: '**',

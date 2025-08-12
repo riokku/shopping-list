@@ -6,6 +6,7 @@
     <div>
       <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
       <a *ngIf="activeSession" mat-button routerLink="/my-lists" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Lists</a>
+      <a *ngIf="activeSession" mat-button routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Admin</a>
     </div>
     <div>
       <div>

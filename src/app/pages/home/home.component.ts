@@ -10,7 +10,9 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatIcon } from '@angular/material/icon';
 import { StoreModel } from '../../shared/models/store.model';
+import { Session } from '@supabase/supabase-js';
 import { Router } from '@angular/router';
+import { SupabaseService } from '../../shared/services/supa/supa.service';
 
 @Component({
   selector: 'app-home',
@@ -35,9 +37,11 @@ export class HomeComponent implements OnInit{
 
   storeControl = new FormControl('');
   filteredOptions!: Observable<StoreModel[]>;
+  activeSession: Session | null = null;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private supaService: SupabaseService,
   ){
     this.storeList = this.listDataDefaultService.getStores()
   }
@@ -47,6 +51,8 @@ export class HomeComponent implements OnInit{
       startWith(''),
       map(value => this.filterStores(value || '')),
     );
+
+    this.supaService.session$.subscribe(session => this.activeSession = session);
   }
 
   private filterStores(incomingStoreName: string): StoreModel[] {

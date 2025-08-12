@@ -134,16 +134,16 @@ export class CreateListComponent {
   }
 
   finalizeList(){
-  this.dialog.open(DialogComponent, {
-      width: '450px',
-       backdropClass: 'backdrop'
-    }).afterClosed().subscribe(author => {
-      if (author) {
-        this.submitList(author);
-      } else {
-        console.error("Issue getting author");
-      }
-    });
+    this.dialog.open(DialogComponent, {
+        width: '450px',
+        backdropClass: 'backdrop'
+      }).afterClosed().subscribe(author => {
+        if (author) {
+          this.submitList(author);
+        } else {
+          console.error("Issue getting author");
+        }
+      });
   }
 
 

@@ -4,7 +4,6 @@ import { environment } from '../../../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { ShoppingListItemModel } from '../../models/shopping-list-item.model';
 import { Router } from '@angular/router';
-import { StoreItemModel } from '../../models/store-item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +50,28 @@ export class SupabaseService {
 
   getUser() {
     return this.supabase.auth.getUser();
+  }
+
+  async isAdmin(): Promise<boolean>{
+    const { data: { user } }  = await this.getUser();
+
+    if (!user) {
+      return false;
+    }
+
+    const { data: profile, error } = await this.supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    if (error || !profile) {
+      console.error('Error fetching profile', error);
+      return false;
+    }
+
+    return profile.role === 'admin';
+
   }
 
   //Managing lists
@@ -116,6 +137,21 @@ export class SupabaseService {
     }
 
     return data ?? [];
+  }
+
+  //Managing inventory
+
+  async getItems(store: string){
+    const { data, error } = await this.supabase
+    .from(store)
+    .select('*')
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data ?? [];
+
   }
 
 }
