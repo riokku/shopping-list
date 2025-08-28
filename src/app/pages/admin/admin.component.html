@@ -8,20 +8,73 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-4">
+        <div class="submit-form-wrapper">
+          <form [formGroup]="adminForm" class="store-item-picker-form p-4" (ngSubmit)="onSubmit()"  #formElement="ngForm">
+            <h2 *ngIf="isEditing()">
+              Edit item
+            </h2>
+            <h2 *ngIf="!isEditing()">
+              Add item
+            </h2>
+            <mat-form-field class="form-field-full-width">
+              <mat-label>Name</mat-label>
+              <input
+               matInput
+               formControlName="name"
+               name="name"
+               required
+               >
+              <mat-error *ngIf="adminForm.get('name')?.hasError('required') && (adminForm.get('name')?.touched || adminForm.get('name')?.dirty)">
+                Name is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field-full-width">
+              <mat-label>Aisle</mat-label>
+              <input type="text"
+              placeholder="Pick one"
+              matInput
+              formControlName="aisle"
+              name="aisle"
+              [matAutocomplete]="auto"
+              required>
+              <mat-autocomplete #auto="matAutocomplete">
+                @for (aisle of aisleOptions; track aisle) {
+                  <mat-option [value]="aisle">
+                    <div class="row store-selection-wrapper">
+                      <div class="col-12">
+                        <strong>{{aisle}}</strong>
+                      </div>
+                    </div>
+                  </mat-option>
+                }
+              </mat-autocomplete>
+              <mat-error *ngIf="adminForm.get('aisle')?.hasError('required') && (adminForm.get('aisle')?.touched || adminForm.get('aisle')?.dirty)">
+                Aisle is required
+              </mat-error>
+            </mat-form-field>
+            <button mat-fab extended color="primary" type="submit" [disabled]="adminForm.invalid" *ngIf="!isEditing()">
+              <mat-icon>add_box</mat-icon>
+              Add item
+            </button>
+            <button mat-fab extended color="primary" type="button" [disabled]="adminForm.invalid" *ngIf="isEditing()" (click)="updateItem()">
+              <mat-icon>sync</mat-icon>
+              Update item
+            </button>
+            <button mat-fab extended color="accent" type="button" [disabled]="adminForm.invalid" *ngIf="isEditing()" (click)="cancelUpdate()">
+              <mat-icon>cancel</mat-icon>
+              Cancel item
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="col-8">
         <h2>
           Safeway inventory catalogue:
         </h2>
-        <div class="actions-wrapper">
+        <div class="actions-wrapper mb-4">
           <input type="text">
-          <button mat-mini-fab aria-label="edit item" color="primary" class="add-button" (click)="openDialog()">
-            <mat-icon>add</mat-icon>
-          </button>
         </div>
-      </div>
-    </div>
-    <div class="row mt-4">
-      <div class="col-12">
         <div class="item-wrapper mb-2" *ngFor="let item of storeItems; let i = index">
           <div>
             <div>
@@ -29,10 +82,10 @@
             </div>
           </div>
           <div class="in-list-item-actions">
-            <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" (click)="editItem()">
+            <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" [disabled]="isEditing()" (click)="setFormUpdateItem(item, i)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-mini-fab aria-label="delete item" (click)="deleteItem()">
+            <button mat-mini-fab aria-label="delete item" [disabled]="isEditing()" (click)="deleteItem(item)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>

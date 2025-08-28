@@ -140,18 +140,49 @@ export class SupabaseService {
   }
 
   //Managing inventory
-
   async getItems(store: string){
     const { data, error } = await this.supabase
     .from(store)
     .select('*')
-
     if (error) {
       throw new Error(error.message);
     }
-
     return data ?? [];
+  }
 
+  async addItem(item: any){
+    const { data, error } = await this.supabase
+    .from('safeway_pullman')
+    .insert([
+      {
+        item_name: item.name,
+        item_aisle: item.aisle
+      }
+    ])
+    .select()
+    if (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async deleteItem(item: any){
+    const { error } = await this.supabase
+      .from('safeway_pullman')
+      .delete()
+      .eq('item_name', item.item_name)
+  }
+
+  async updateItemn(item: any, id: number | undefined){
+    const { data, error } = await this.supabase
+    .from('safeway_pullman')
+    .update(
+      {
+        item_name: item.name,
+        item_aisle: item.aisle
+      }
+    )
+    .eq('id', id)
+    .select()
   }
 
 }

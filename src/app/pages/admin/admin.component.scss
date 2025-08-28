@@ -5,7 +5,7 @@ section{
 }
 
 h1{
-  border-bottom: 1px solid #666;
+  //border-bottom: 1px solid #666;
   margin-bottom: 2rem;
 }
 
@@ -15,17 +15,38 @@ h1{
   justify-content: space-between;
   background-color: cornsilk;
   border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-}
-
-.add-button{
-  background-color: darkolivegreen;
+  padding: 0.75rem 1.5rem;
+  &:hover{
+    .in-list-item-actions{
+      visibility: visible;
+    }
+  }
 }
 
 .actions-wrapper{
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.store-item-picker-form{
+  background-color: ghostwhite;
+  border-radius: 0.5rem;
+}
+
+.form-field-full-width {
+  width: 100%;
+}
+
+.in-list-item-actions{
+  visibility: hidden;
+  button{
+    width: 36px;
+    height: 36px;
+    > mat-icon {
+      font-size: 24px;
+    }
+  }
 }
 
 ::ng-deep .backdrop{
