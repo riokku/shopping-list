@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { SupabaseService } from '../services/supa/supa.service';
+import { SupabaseService } from '../../services/supa/supa.service';
 import { map } from 'rxjs/operators';
 
 @Injectable({

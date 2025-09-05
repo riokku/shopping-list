@@ -139,6 +139,13 @@ export class SupabaseService {
     return data ?? [];
   }
 
+  async deleteList(listGUID: string | undefined){
+    const { error } = await this.supabase
+      .from('shopping_lists')
+      .delete()
+      .eq('list_id', listGUID)
+  }
+
   //Managing inventory
   async getItems(store: string){
     const { data, error } = await this.supabase

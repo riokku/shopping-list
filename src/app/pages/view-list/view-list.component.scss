@@ -1,0 +1,33 @@
+img{
+  max-height: 50px;
+}
+
+.list-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: clamp(500px, 65%, 100%)
+}
+
+.item-section{
+  width: 100%;
+  .aisle-header{
+    background-color: beige;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    display: flex;
+    h3{
+      margin: 0.5rem 0 0 0;
+    }
+  }
+  .items-wrapper{
+    font-size: 1.2rem;
+    ul{
+      padding: 1rem;
+      list-style-type: none;
+    }
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}

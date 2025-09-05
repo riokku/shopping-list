@@ -64,7 +64,8 @@ export class CreateListComponent {
     this.shoppingForm = this.formBuilder.group({
       item: '',
       quantity: '',
-      notes: ''
+      notes: '',
+      isCompleted: false
     })
   }
 
@@ -116,7 +117,8 @@ export class CreateListComponent {
     const updatedItem: ShoppingListItemModel = {
       item: this.shoppingForm.value.item,
       quantity: this.shoppingForm.value.quantity,
-      notes: this.shoppingForm.value.notes
+      notes: this.shoppingForm.value.notes,
+      isCompleted: false
     };
 
     // Update the item at the stored index

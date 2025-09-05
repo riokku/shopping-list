@@ -1,27 +1,48 @@
-{{storeGUID}}<br />
+<section *ngIf="listDetails">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <div class="list-wrapper">
+          <img class="m-auto" src="{{listDetails.store_logo}}" alt="{{listDetails.store_name}} logo"><br />
+          <h3>
+            Here&rsquo;s what&rsquo;s on your {{listDetails.store_name}} list:
+          </h3>
+          <div class="item-section" *ngFor="let aisle of aisleOrder">
+            <ng-container *ngIf="groupedItems[aisle]?.length">
+              <div class="aisle-header">
+                <h3>{{ aisle }}</h3>
+              </div>
+              <div class="items-wrapper">
+                <ul>
+                  <li *ngFor="let item of groupedItems[aisle]">
+                    {{ item.item.name }} ({{ item.quantity }}) <br />
+                    {{ item.isCompleted}}
+                  </li>
+                </ul>
+              </div>
+            </ng-container>
+          </div>
+          <div class="delete-section">
+          <button mat-fab extended color="accent" type="button" (click)="deleteList()">
+            <mat-icon>delete</mat-icon>
+            Delete list
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <div *ngIf="!listDetails">
-  This doesn't appear to be a valid list.
+  This doesn't appear to be a valid list. Whoops!
 </div>
 
-{{listDetails?.store_name}}<br />
 
-
-<div *ngFor="let item of listItems">
+<!-- <div *ngFor="let item of listItems">
   <strong>{{ item.item.name }}</strong> (Aisle: {{ item.item.aisle }})
   - Qty: {{ item.quantity }}
   <br />
   <em>{{ item.notes }}</em>
-</div>
-
-<hr>
-<div *ngFor="let aisle of aisleOrder">
-  <ng-container *ngIf="groupedItems[aisle]?.length">
-    <h3>Aisle {{ aisle }}:</h3>
-    <ul>
-      <li *ngFor="let item of groupedItems[aisle]">
-        {{ item.item.name }} — Qty: {{ item.quantity }}
-      </li>
-    </ul>
-  </ng-container>
-</div>
+</div> -->
