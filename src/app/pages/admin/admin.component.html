@@ -78,14 +78,14 @@
         <div class="item-wrapper mb-2" *ngFor="let item of storeItems; let i = index">
           <div>
             <div>
-              <strong>{{ item.item_name }}</strong> ({{ item.item_aisle }})
+              <strong>{{ item?.item_name }}</strong> ({{ item.item_aisle }})
             </div>
           </div>
           <div class="in-list-item-actions">
             <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" [disabled]="isEditing()" (click)="setFormUpdateItem(item, i)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-mini-fab aria-label="delete item" [disabled]="isEditing()" (click)="deleteItem(item)">
+            <button mat-mini-fab aria-label="delete item" [disabled]="isEditing()" (click)="deleteItem(item, i)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>

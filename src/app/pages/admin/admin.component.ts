@@ -37,7 +37,7 @@ export class AdminComponent implements OnInit {
 
   //State management
   isEditing = signal(false);
-  itemToUpdateIndex: number | null = null;
+  itemToUpdateIndex: number = -1;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,25 +53,26 @@ export class AdminComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.storeItems = await this.supaService.getItems(this.storeName);
+    this.storeItems = (await this.supaService.getItems(this.storeName)).sort((a, b) => a.item_name.localeCompare(b.item_name));
   }
 
   async onSubmit() {
-    const isAlreadyAdded = this.storeItems.some((i) => i.name === this.adminForm.value.name);
+    const isAlreadyAdded = this.storeItems.some((i) => i.item_name === this.adminForm.value.name);
     if (!isAlreadyAdded) {
       this.supaService.addItem(this.adminForm.value);
+      console.log(this.adminForm.value);
+
       this.formElement.resetForm();
-      this.storeItems = await this.supaService.getItems(this.storeName);
+      this.storeItems = (await this.supaService.getItems(this.storeName)).sort((a, b) => a.item_name.localeCompare(b.item_name));
     } else {
       alert("This item appears to be in your list already");
     }
   }
 
-  async deleteItem(item: any){
-    //const itemIndex = this.storeItems.indexOf(item);
-    //this.storeItems.splice(itemIndex, 1);
+  async deleteItem(item: any, deleteItemIndex: number){
+    console.log(item);
     this.supaService.deleteItem(item);
-    this.storeItems = await this.supaService.getItems(this.storeName);
+    this.storeItems.splice(deleteItemIndex, 1);
   }
 
   setFormUpdateItem(updateItem: any, updateItemIndex: number): void {
@@ -79,8 +80,7 @@ export class AdminComponent implements OnInit {
     this.formElement.resetForm();
     this.isEditing.set(true);
 
-    console.log(updateItem);
-
+    //Set form to updated item values
     this.adminForm.setValue({
       name: updateItem.item_name,
       aisle: updateItem.item_aisle
@@ -88,19 +88,21 @@ export class AdminComponent implements OnInit {
 
     this.updateItemID = updateItem.id;
 
-    //this.itemToUpdateIndex = updateItemIndex;
+    this.itemToUpdateIndex = updateItemIndex;
   }
 
   async updateItem(){
     const updatedItem: any = this.adminForm.value;
     this.supaService.updateItemn(updatedItem, this.updateItemID);
 
+    this.storeItems[this.itemToUpdateIndex].item_name = updatedItem.name;
+    this.storeItems[this.itemToUpdateIndex].item_aisle = updatedItem.aisle;
+
     // Reset editing state
     this.isEditing.set(false);
-    this.itemToUpdateIndex = null;
+    this.itemToUpdateIndex = -1;
     this.formElement.resetForm();
 
-    this.storeItems = await this.supaService.getItems(this.storeName);
   }
 
   cancelUpdate(){

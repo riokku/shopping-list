@@ -74,6 +74,17 @@ export class SupabaseService {
 
   }
 
+  //Setting up new list options
+  async getStoreItems(store: string){
+    const { data, error } = await this.supabase
+    .from(store)
+    .select('*')
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data ?? [];
+  }
+
   //Managing lists
   async submitList(storeName: string | undefined, storeAddress: string | undefined, storeLogo: string| undefined, listItems:ShoppingListItemModel[], author: string) {
     const { data: userData, error: authError } = await this.supabase.auth.getUser();
