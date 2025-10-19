@@ -15,8 +15,9 @@
               <div class="items-wrapper">
                 <ul>
                   <li *ngFor="let item of groupedItems[aisle]">
-                    {{ item.item.name }} ({{ item.quantity }}) <br />
-                    {{ item.isCompleted}}
+                    {{ item.item.item_name }} ({{ item.quantity }}) <br />
+                    Notes: {{ item.notes}} <br />
+                    IsCompleted: {{ item.isCompleted}}
                   </li>
                 </ul>
               </div>

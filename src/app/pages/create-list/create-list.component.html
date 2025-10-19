@@ -39,11 +39,11 @@
                 [matAutocomplete]="auto"
                 required>
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedItem">
-                  @for (storeItem of selectedStore?.storeItems; track storeItem) {
+                   @for (storeItem of storeItems; track storeItem) {
                     <mat-option [value]="storeItem">
                       <div class="row store-selection-wrapper">
                         <div class="col-12">
-                          <strong>{{storeItem.name}}</strong> (aisle: {{ storeItem.aisle}})
+                          <strong>{{storeItem.item_name}}</strong> (aisle: {{ storeItem.item_aisle}})
                         </div>
                       </div>
                     </mat-option>
@@ -94,8 +94,8 @@
         <ul class="selected-item-list">
           <li *ngFor="let selectedItem of selectedItems; let i = index" [ngClass]="{'is-being-edited': isEditing()}">
             <div class="in-list-item-details">
-              <strong>{{selectedItem.item.name}}</strong>
-              (Aisle: {{selectedItem.item.aisle}})<br />
+              <strong>{{selectedItem.item.item_name}}</strong>
+              (Aisle: {{selectedItem.item.item_aisle}})<br />
               Quantity: {{selectedItem.quantity}}<br />
               <span *ngIf="selectedItem.notes">Notes: {{selectedItem.notes}}</span>
             </div>

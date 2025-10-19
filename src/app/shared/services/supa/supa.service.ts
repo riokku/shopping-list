@@ -78,7 +78,7 @@ export class SupabaseService {
   async getStoreItems(store: string){
     const { data, error } = await this.supabase
     .from(store)
-    .select('*')
+    .select('item_name, item_aisle')
     if (error) {
       throw new Error(error.message);
     }

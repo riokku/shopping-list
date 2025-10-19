@@ -46,7 +46,7 @@ export class ViewListComponent {
   groupItemsByAisle(items: any[]): Record<string, any[]> {
     const groups: Record<string, any[]> = {};
     for (const item of items) {
-      const aisle = item.item.aisle?.toString() ?? 'Unknown';
+      const aisle = item.item.item_aisle?.toString() ?? 'Unknown';
       if (!groups[aisle]) {
         groups[aisle] = [];
       }

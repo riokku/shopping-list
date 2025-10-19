@@ -17,24 +17,24 @@ export class ListDataDefaultService {
       "storeGUID": "b20cf45d-1d4a-4b78-9237-e8d1b6e8d1c3",
       "storeItems": [
         {
-          "name": "Milk",
-          "aisle": "12"
+          "item_name": "Milk",
+          "item_aisle": "12"
         },
         {
-          "name": "Eggs",
-          "aisle": "6"
+          "item_name": "Eggs",
+          "item_aisle": "6"
         },
         {
-          "name": "Bread",
-          "aisle": "10"
+          "item_name": "Bread",
+          "item_aisle": "10"
         },
         {
-          "name": "Bananas",
-          "aisle": "Produce"
+          "item_name": "Bananas",
+          "item_aisle": "Produce"
         },
         {
-          "name": "Chicken",
-          "aisle": "Freezer Section"
+          "item_name": "Chicken",
+          "item_aisle": "Freezer Section"
         }
       ],
       "storeAisleOrder": [
@@ -50,24 +50,24 @@ export class ListDataDefaultService {
       "storeGUID": "f839d7a1-a26d-4c37-8db9-8823eac9cde4",
       "storeItems": [
         {
-          "name": "Toilet Paper",
-          "aisle": "3"
+          "item_name": "Toilet Paper",
+          "item_aisle": "3"
         },
         {
-          "name": "Salmon",
-          "aisle": "Freezer"
+          "item_name": "Salmon",
+          "item_aisle": "Freezer"
         },
         {
-          "name": "Blueberries",
-          "aisle": "Produce"
+          "item_name": "Blueberries",
+          "item_aisle": "Produce"
         },
         {
-          "name": "Cheese",
-          "aisle": 8
+          "item_name": "Cheese",
+          "item_aisle": 8
         },
         {
-          "name": "Cereal",
-          "aisle": 5
+          "item_name": "Cereal",
+          "item_aisle": 5
         }
       ],
       "storeAisleOrder": [
@@ -83,24 +83,24 @@ export class ListDataDefaultService {
       "storeGUID": "ad58f19c-cdf9-4bb6-b182-7146df8d4fb7",
       "storeItems": [
         {
-          "name": "Shampoo",
-          "aisle": "14"
+          "item_name": "Shampoo",
+          "item_aisle": "14"
         },
         {
-          "name": "Conditioner",
-          "aisle": "14"
+          "item_name": "Conditioner",
+          "item_aisle": "14"
         },
         {
-          "name": "Towels",
-          "aisle": 9
+          "item_name": "Towels",
+          "item_aisle": 9
         },
         {
-          "name": "Toothpaste",
-          "aisle": "Personal Care"
+          "item_name": "Toothpaste",
+          "item_aisle": "Personal Care"
         },
         {
-          "name": "Coffee",
-          "aisle": 7
+          "item_name": "Coffee",
+          "item_aisle": 7
         }
       ],
       "storeAisleOrder": [
@@ -116,24 +116,24 @@ export class ListDataDefaultService {
       "storeGUID": "f789b0ae-bc15-4a9d-b87d-4765311f84f5",
       "storeItems": [
         {
-          "name": "Almond Butter",
-          "aisle": "Nuts & Spreads"
+          "item_name": "Almond Butter",
+          "item_aisle": "Nuts & Spreads"
         },
         {
-          "name": "Orange Juice",
-          "aisle": "Refrigerated Drinks"
+          "item_name": "Orange Juice",
+          "item_aisle": "Refrigerated Drinks"
         },
         {
-          "name": "Avocados",
-          "aisle": "Produce"
+          "item_name": "Avocados",
+          "item_aisle": "Produce"
         },
         {
-          "name": "Chocolate",
-          "aisle": "Sweets"
+          "item_name": "Chocolate",
+          "item_aisle": "Sweets"
         },
         {
-          "name": "Pasta",
-          "aisle": 4
+          "item_name": "Pasta",
+          "item_aisle": 4
         }
       ],
       "storeAisleOrder": [

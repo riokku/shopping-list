@@ -1,4 +1,4 @@
 export interface StoreItemModel {
-  name: string,
-  aisle: string | number
+  item_name: string,
+  item_aisle: string | number
 }

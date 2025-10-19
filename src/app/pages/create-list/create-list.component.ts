@@ -2,7 +2,6 @@ import { Component, inject, ViewChild, signal } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { StoreModel } from '../../shared/models/store.model';
 import { ListDataDefaultService } from '../../shared/services/list-data-default/list-data-default.service';
-import { StoreItemModel } from '../../shared/models/store-item.model';
 import { Observable } from 'rxjs';
 import { FormsModule, FormControl, ReactiveFormsModule, FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -47,6 +46,7 @@ export class CreateListComponent {
   storeItemsControl = new FormControl('');
   filteredOptions!: Observable<StoreModel[]>;
   selectedItems: any[] = []; // Array to store selected items
+  storeItems: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -69,11 +69,23 @@ export class CreateListComponent {
     })
   }
 
+  async ngOnInit(){
+    this.storeItems = await this.supaService.getStoreItems('safeway_pullman');
+    console.log(this.storeItems);
+
+  }
+
   onSubmit() {
-    const isAlreadyAdded = this.selectedItems.some((i) => i.item.name === this.shoppingForm.value.item.name);
+    const isAlreadyAdded = this.selectedItems.some((i) => i.item.item_name === this.shoppingForm.value.item.name);
     if (!isAlreadyAdded) {
       this.selectedItems.push(this.shoppingForm.value);
       this.formElement.resetForm();
+      this.shoppingForm.reset({
+        item: '',
+        quantity: '',
+        notes: '',
+        isCompleted: false
+      });
     } else {
       alert("This item appears to be in your list already");
     }
@@ -86,23 +98,24 @@ export class CreateListComponent {
 
   setFormUpdateItem(updateItem: ShoppingListItemModel, updateItemIndex: number): void {
     //Reset form and update state
-    this.formElement.resetForm();
+    this.shoppingForm.reset();
     this.isEditing.set(true);
 
     // Look for the StoreItemModel matching the saved name
-    const matchingStoreItem = this.selectedStore?.storeItems.find(
-      storeItem => storeItem.name === updateItem.item.name
+    const matchingStoreItem = this.storeItems.find(
+      storeItem => storeItem.item_name === updateItem.item.item_name
     );
 
     if (!matchingStoreItem) {
-      console.warn('No matching store item found for:', updateItem.item.name);
+      console.warn('No matching store item found for:', updateItem.item.item_name);
       return;
     }
 
     this.shoppingForm.setValue({
       item: matchingStoreItem,
       quantity: updateItem.quantity,
-      notes: updateItem.notes
+      notes: updateItem.notes,
+      isCompleted: false
     });
 
     this.itemToUpdateIndex = updateItemIndex;
@@ -127,11 +140,21 @@ export class CreateListComponent {
     // Reset editing state
     this.isEditing.set(false);
     this.itemToUpdateIndex = null;
-    this.formElement.resetForm();
+    this.shoppingForm.reset({
+      item: '',
+      quantity: '',
+      notes: '',
+      isCompleted: false
+    });
   }
 
   cancelUpdate(){
-    this.formElement.resetForm();
+    this.shoppingForm.reset({
+      item: '',
+      quantity: '',
+      notes: '',
+      isCompleted: false
+    });
     this.isEditing.set(false)
   }
 
@@ -154,8 +177,11 @@ export class CreateListComponent {
   }
 
   //Used to display selected items in list
-  displaySelectedItem(item: StoreItemModel): string {
-    return item ? `${item.name} (${item.aisle})` : '';
+  // displaySelectedItem(item: StoreItemModel): string {
+  //   return item ? `${item.name} (${item.aisle})` : '';
+  // }
+  displaySelectedItem(item: any): string {
+    return item ? `${item.item_name} (${item.item_aisle})` : '';
   }
 
 }
