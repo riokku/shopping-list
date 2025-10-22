@@ -1,8 +1,12 @@
 .site-title {
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-weight: 500;
   margin-right: 2rem;
   letter-spacing: 0.5px;
+}
+
+img{
+  max-height: 40px;
 }
 
 .desktop-nav {
@@ -13,12 +17,23 @@
   gap: 1rem;
 }
 
+.nav-options{
+  display: flex;
+  gap: 1rem;
+}
+
+.site-logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .spacer {
   flex: 1 1 auto;
 }
 
 .active {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .sidenav-container {
@@ -35,4 +50,10 @@
     height: calc(100vh - 56px);
     margin-top: 56px;
   }
+}
+
+.mat-toolbar{
+  background-color: rgba(0,0,0,0);
+  padding: 1rem 5rem;
+  height: fit-content
 }
