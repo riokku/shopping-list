@@ -16,5 +16,5 @@ import { FooterComponent } from "./shared/components/footer/footer.component";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'MyList';
+  title = 'Cartographer';
 }

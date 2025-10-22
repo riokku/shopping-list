@@ -24,14 +24,29 @@
   }
 }
 
-.header-wrapper{
+.home-half{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.logo-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: right;
+}
+
+.header-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: left;
   flex-direction: column;
   padding: 0.5rem;
   h1{
     font-weight: bold;
+  }
+  button{
+    width: fit-content;
   }
 }
 
@@ -59,4 +74,8 @@
   > div:nth-child(2){
     flex-grow: 1;
   }
+}
+
+img{
+  width: clamp(200px, 450px, 100%);
 }

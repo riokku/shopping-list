@@ -12,32 +12,32 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Home'
+    title: 'Home | Cartographer'
   },
   {
     path: 'create-list/:guid',
     component: CreateListComponent,
-    title: 'Create your list'
+    title: 'Cartographer | Create a list'
   },
   {
     path: 'my-lists',
     component: MyListsComponent,
-    title: 'My Lists'
+    title: 'Cartographer | My Lists'
   },
   {
     path: 'store-management',
     component: StoreManagementComponent,
-    title: 'Manage Store'
+    title: 'Cartographer | Manage Store'
   },
   {
     path: 'login',
     component: LoginComponent,
-    title: 'Authenticate'
+    title: 'Cartographer | Authenticate'
   },
   {
     path: 'list/:guid',
     component: ViewListComponent,
-    title: 'Time to shop!'
+    title: 'Cartographer | Time to shop!'
   },
   {
     path: 'admin',

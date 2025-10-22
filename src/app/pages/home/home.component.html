@@ -1,54 +1,70 @@
 <div class="page-wrapper">
-  <div *ngIf="activeSession">
-    <div class="header-wrapper">
-      <h1>
-        Welcome to Shop-A-Lot
-      </h1>
-      <h4>
-        Tired of not being able to share shopping lists? We&rsquo;re here to make that easier.
-      </h4>
-    </div>
-    <form class="store-picker-form">
-      <mat-form-field class="form-field-full-width">
-        <mat-label>Where are you shopping?</mat-label>
-        <input type="text"
-              placeholder="Pick one"
-              aria-label="Where are you shopping?"
-              class="testing"
-              matInput
-              [formControl]="storeControl"
-              [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedStore">
-          @for (store of filteredOptions | async; track store) {
-            <mat-option [value]="store">
-              <div class="row store-selection-wrapper">
-                <div class="col-4">
-                  <img src="{{store.storeLogo}}" alt="{{store.storeName}}">
-                </div>
-                <div class="col-8">
-                  <strong>{{store.storeName}}</strong><br />
-                  {{store.storeLocationStreet}}, {{store.storeLocationTown}}, {{store.storeLocationState}}
-                </div>
-              </div>
-            </mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-      <div class="create-list" [ngClass]="{'showing': storeControl.value}">
-        <button mat-fab extended color="primary" type="button" (click)="generateList(storeControl.value)">
-          <mat-icon>add_shopping_cart</mat-icon>
-          Create list for this store
-        </button>
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-6 home-half">
+      <div class="logo-wrapper">
+        <img src="assets/full-logo.png" alt="">
       </div>
-    </form>
+    </div>
+    <div class="col-12 col-md-6 home-half">
+      <div *ngIf="activeSession">
+        <div class="header-wrapper">
+          <h1>
+            Tired of shopping in circles? We're here to fix that.
+          </h1>
+          <p class="mb-4">
+            Cartographer has a VERY niche use case... We allow you to create and share shopping lists for the Safeway grocery store in Pullman, WA. Moreso, we automatically sort your items by aisle making your shopping experience as efficient as possible.
+          </p>
+          <a mat-fab extended color="accent" type="button" href="/create-list">
+            <mat-icon>add_shopping_cart</mat-icon>
+            Create list
+          </a>
+        </div>
+        <!-- <form class="store-picker-form">
+          <mat-form-field class="form-field-full-width">
+            <mat-label>Where are you shopping?</mat-label>
+            <input type="text"
+                  placeholder="Pick one"
+                  aria-label="Where are you shopping?"
+                  class="testing"
+                  matInput
+                  [formControl]="storeControl"
+                  [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedStore">
+              @for (store of filteredOptions | async; track store) {
+                <mat-option [value]="store">
+                  <div class="row store-selection-wrapper">
+                    <div class="col-4">
+                      <img src="{{store.storeLogo}}" alt="{{store.storeName}}">
+                    </div>
+                    <div class="col-8">
+                      <strong>{{store.storeName}}</strong><br />
+                      {{store.storeLocationStreet}}, {{store.storeLocationTown}}, {{store.storeLocationState}}
+                    </div>
+                  </div>
+                </mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+          <div class="create-list" [ngClass]="{'showing': storeControl.value}">
+            <button mat-fab extended color="primary" type="button" (click)="generateList(storeControl.value)">
+              <mat-icon>add_shopping_cart</mat-icon>
+              Create list
+            </button>
+          </div>
+        </form> -->
+      </div>
+      <div *ngIf="!activeSession">
+        <h2>
+          Looks like you&rsquo;re not logged in. Let&rsquo;s go!
+        </h2>
+        <a mat-fab extended color="accent" href="/login">
+          <mat-icon>login</mat-icon>
+          Login or create account
+        </a>
+      </div>
+    </div>
   </div>
-  <div *ngIf="!activeSession">
-    <h2>
-      Looks like you&rsquo;re not logged in. Let&rsquo;s go!
-    </h2>
-    <a mat-fab extended color="accent" href="/login">
-      <mat-icon>login</mat-icon>
-      Login or create account
-    </a>
   </div>
+
 </div>
