@@ -46,6 +46,8 @@ export class ViewListComponent {
   groupItemsByAisle(items: any[]): Record<string, any[]> {
     const groups: Record<string, any[]> = {};
     for (const item of items) {
+      console.log(item);
+
       const aisle = item.item.item_aisle?.toString() ?? 'Unknown';
       if (!groups[aisle]) {
         groups[aisle] = [];
@@ -53,7 +55,7 @@ export class ViewListComponent {
       groups[aisle].push(item);
     }
 
-    // Sort aisles by your custom order
+    // Sort aisles by custom order
     return Object.fromEntries(
       Object.entries(groups).sort(([a], [b]) => {
         const indexA = this.aisleOrder.indexOf(a);

@@ -3,22 +3,12 @@
     <div class="row">
       <div class="col-12 col-md-4">
         <div class="store-wrapper">
-          <div class="selected-label">
-            <p class="fs-4 m-0 p-0">
-              Selected store:
-            </p>
-          </div>
           <div class="store-info-wrapper">
             <div>
-              <h1>
-                {{selectedStore?.storeName}}
-              </h1>
+              <img class="mb-3" src="https://s29.q4cdn.com/239956855/files/doc_downloads/mediaAssets/safeway/1-Swy_Horiz_CMYK.png" alt="">
               <h3>
-                {{selectedStore?.storeLocationStreet}}, {{selectedStore?.storeLocationTown}}, {{selectedStore?.storeLocationState}}
+                430 SE Bishop Blvd, Pullman, WA 99163
               </h3>
-            </div>
-            <div>
-              <img src="{{selectedStore?.storeLogo}}" alt="{{selectedStore?.storeName}}">
             </div>
           </div>
           <div class="list-label">
@@ -72,7 +62,7 @@
                 <mat-icon>sync</mat-icon>
                 Update item
               </button>
-              <button mat-fab extended color="accent" type="button" [disabled]="shoppingForm.invalid" *ngIf="isEditing()" (click)="cancelUpdate()">
+              <button mat-fab extended color="warn" type="button" [disabled]="shoppingForm.invalid" *ngIf="isEditing()" (click)="cancelUpdate()">
                 <mat-icon>cancel</mat-icon>
                 Cancel item
               </button>
@@ -103,7 +93,7 @@
               <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" [disabled]="isEditing()" (click)="setFormUpdateItem(selectedItem, i)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-mini-fab aria-label="delete item" [disabled]="isEditing()" (click)="deleteItem(selectedItem)">
+              <button mat-mini-fab aria-label="delete item" color="warn" [disabled]="isEditing()" (click)="deleteItem(selectedItem)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>

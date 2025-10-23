@@ -27,6 +27,9 @@ h1{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  mat-form-field{
+    width: clamp(250px, 650px, 100%);
+  }
 }
 
 .store-item-picker-form{

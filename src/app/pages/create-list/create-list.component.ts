@@ -45,7 +45,7 @@ export class CreateListComponent {
 
   storeItemsControl = new FormControl('');
   filteredOptions!: Observable<StoreModel[]>;
-  selectedItems: any[] = []; // Array to store selected items
+  selectedItems: any[] = [];
   storeItems: any[] = [];
 
   constructor(
@@ -59,8 +59,6 @@ export class CreateListComponent {
       this.selectedStore = this.listDataDefaultService.getSpecificStore(this.storeGUID);
     });
 
-    this.selectedStoreAddress = `${this.selectedStore?.storeLocationStreet} ${this.selectedStore?.storeLocationTown}, ${this.selectedStore?.storeLocationState}`;
-
     this.shoppingForm = this.formBuilder.group({
       item: '',
       quantity: '',
@@ -71,8 +69,6 @@ export class CreateListComponent {
 
   async ngOnInit(){
     this.storeItems = await this.supaService.getStoreItems('safeway_pullman');
-    console.log(this.storeItems);
-
   }
 
   onSubmit() {
@@ -173,7 +169,7 @@ export class CreateListComponent {
 
 
   submitList(author: string){
-    this.supaService.submitList(this.selectedStore?.storeName, this.selectedStoreAddress, this.selectedStore?.storeLogo, this.selectedItems, author);
+    this.supaService.submitList("Safeway", "430 SE Bishop Blvd, Pullman, WA 99163", "https://s29.q4cdn.com/239956855/files/doc_downloads/mediaAssets/safeway/1-Swy_Horiz_CMYK.png", this.selectedItems, author);
   }
 
   //Used to display selected items in list

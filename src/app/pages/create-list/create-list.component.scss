@@ -6,14 +6,11 @@
   *{
     margin: 0;
   }
-  h1{
+  h3{
     font-size: 1.3rem;
   }
-  h3{
-    font-size: 0.8rem;
-  }
   img{
-    width: clamp(50px, 75px, 125px);
+    width: clamp(200px, 400px, 100%);
   }
 }
 
@@ -30,6 +27,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 2.5rem;
+
 }
 
 .list-label{

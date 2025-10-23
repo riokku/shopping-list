@@ -28,12 +28,14 @@ import { ListDataDefaultService } from '../../shared/services/list-data-default/
 export class AdminComponent implements OnInit {
 
   storeItems: any[] = [];
+  storeItemsResults: any[] = [];
   aisleOptions: any[] = [];
   private storeName = "safeway_pullman";
   adminForm: FormGroup;
   updateItemID: number | undefined;
   @ViewChild('formElement') formElement!: NgForm;
 
+  searchInput: string = '';
 
   //State management
   isEditing = signal(false);
@@ -54,6 +56,7 @@ export class AdminComponent implements OnInit {
 
   async ngOnInit() {
     this.storeItems = (await this.supaService.getItems(this.storeName)).sort((a, b) => a.item_name.localeCompare(b.item_name));
+    this.storeItemsResults = this.storeItems;
   }
 
   async onSubmit() {
@@ -108,6 +111,10 @@ export class AdminComponent implements OnInit {
   cancelUpdate(){
     this.formElement.resetForm();
     this.isEditing.set(false)
+  }
+
+  updateResults(){
+    this.storeItemsResults = this.storeItems.filter(item => item.item_name.toLowerCase().includes(this.searchInput.toLowerCase()));
   }
 
   openDialog() {

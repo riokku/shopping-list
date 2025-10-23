@@ -15,7 +15,7 @@ export const routes: Routes = [
     title: 'Home | Cartographer'
   },
   {
-    path: 'create-list/:guid',
+    path: 'create-list',
     component: CreateListComponent,
     title: 'Cartographer | Create a list'
   },

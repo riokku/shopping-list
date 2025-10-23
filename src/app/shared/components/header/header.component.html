@@ -2,8 +2,12 @@
   <!-- Desktop Navigation -->
   <div class="desktop-nav" *ngIf="!(isHandset$ | async)">
     <div class="site-logo">
-      <img class="me-2" src="simple-logo-gray.png" alt="">
-      <span class="site-title">Cartographer</span>
+      <a href="/">
+        <img class="me-2" src="simple-logo-gray.png" alt="">
+      </a>
+      <a href="/">
+        <span class="site-title">Cartographer</span>
+      </a>
     </div>
     <div class="nav-options">
       <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>

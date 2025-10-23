@@ -5,7 +5,7 @@
         <div class="list-wrapper">
           <img class="m-auto" src="{{listDetails.store_logo}}" alt="{{listDetails.store_name}} logo"><br />
           <h3>
-            Here&rsquo;s what&rsquo;s on your {{listDetails.store_name}} list:
+            Here&rsquo;s what&rsquo;s on your list:
           </h3>
           <div class="item-section" *ngFor="let aisle of aisleOrder">
             <ng-container *ngIf="groupedItems[aisle]?.length">

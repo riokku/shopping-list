@@ -70,12 +70,15 @@
       </div>
       <div class="col-8">
         <h2>
-          Safeway inventory catalogue:
+          Inventory catalogue:
         </h2>
-        <div class="actions-wrapper mb-4">
-          <input type="text">
+        <div class="actions-wrapper">
+          <mat-form-field class="example-full-width">
+            <mat-label>Search inventory</mat-label>
+            <input matInput type="text" (input)="updateResults()" [(ngModel)]="searchInput" placeholder="Ex. Pizza">
+          </mat-form-field>
         </div>
-        <div class="item-wrapper mb-2" *ngFor="let item of storeItems; let i = index">
+        <div class="item-wrapper mb-2" *ngFor="let item of storeItemsResults; let i = index">
           <div>
             <div>
               <strong>{{ item?.item_name }}</strong> ({{ item.item_aisle }})
