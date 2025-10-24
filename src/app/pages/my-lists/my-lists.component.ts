@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { SupabaseService } from '../../shared/services/supa/supa.service';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-my-lists',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './my-lists.component.html',
   styleUrl: './my-lists.component.scss'

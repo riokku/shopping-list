@@ -4,8 +4,11 @@ import { ShoppingListItemModel } from '../../shared/models/shopping-list-item.mo
 import { SupabaseService } from '../../shared/services/supa/supa.service';
 import { CommonModule } from '@angular/common';
 import { ListDataDefaultService } from '../../shared/services/list-data-default/list-data-default.service';
-import { MatIcon } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 @Component({
   selector: 'app-view-list',
@@ -13,7 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     MatIcon,
-    MatButtonModule
+    MatIconModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatDividerModule
   ],
   templateUrl: './view-list.component.html',
   styleUrl: './view-list.component.scss'
@@ -46,8 +52,6 @@ export class ViewListComponent {
   groupItemsByAisle(items: any[]): Record<string, any[]> {
     const groups: Record<string, any[]> = {};
     for (const item of items) {
-      console.log(item);
-
       const aisle = item.item.item_aisle?.toString() ?? 'Unknown';
       if (!groups[aisle]) {
         groups[aisle] = [];
