@@ -1,6 +1,6 @@
 <div class="shopping-lists-wrapper">
   <div>
-    <h2>Your Shopping Lists</h2>
+    <h2 class="mb-3">Your Shopping Lists</h2>
     <div *ngIf="loading"><mat-spinner></mat-spinner></div>
     <div *ngIf="error">{{ error }}</div>
     <div *ngIf="!loading && shoppingLists.length === 0">No lists found.</div>

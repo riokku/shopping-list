@@ -29,10 +29,10 @@
               </div>
               <div class="items-wrapper">
                 <ul>
-                  <li *ngFor="let item of groupedItems[aisle]">
+                  <li *ngFor="let item of groupedItems[aisle]; let i = index" (click)="toggleCompletion(i, item.isCompleted)" [ngClass]="{'completed': item.isCompleted}">
                     {{ item.item.item_name }} ({{ item.quantity }}) <br />
-                    Notes: {{ item.notes}} <br />
-                    IsCompleted: {{ item.isCompleted}}
+                    Notes: {{ item.notes}}
+                    <!-- <br /> IsCompleted: {{ item.isCompleted}} -->
                   </li>
                 </ul>
               </div>

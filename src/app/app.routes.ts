@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { MyListsComponent } from './pages/my-lists/my-lists.component';
 import { CreateListComponent } from './pages/create-list/create-list.component';
-import { StoreManagementComponent } from './pages/store-management/store-management.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ViewListComponent } from './pages/view-list/view-list.component';
 import { AdminComponent } from './pages/admin/admin.component';
@@ -23,11 +22,6 @@ export const routes: Routes = [
     path: 'my-lists',
     component: MyListsComponent,
     title: 'Cartographer | My Lists'
-  },
-  {
-    path: 'store-management',
-    component: StoreManagementComponent,
-    title: 'Cartographer | Manage Store'
   },
   {
     path: 'login',

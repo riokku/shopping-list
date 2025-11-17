@@ -27,6 +27,7 @@ export class SupabaseService {
     });
   }
 
+  //Managing auth / login
   get authState$() {
     return this.authState.asObservable();
   }
@@ -155,7 +156,45 @@ export class SupabaseService {
       .from('shopping_lists')
       .delete()
       .eq('list_id', listGUID)
+
+    if (error) console.error(error);
   }
+
+  async toggleCompletion(listGUID: string | undefined, itemIndex: number, currentStatus: boolean){
+
+    //Retrieve entire "items" object
+    const { data: incomingData, error: incomingError } = await this.supabase
+      .from('shopping_lists')
+      .select('items')
+      .eq('list_id', listGUID)
+      .single()
+
+    if (incomingError) console.error(incomingError);
+
+    //Check to ensure "items" comes back as an array
+    const itemsArray = Array.isArray(incomingData?.items) ? incomingData?.items : [];
+
+    //Create new array to modify and eventually send back
+    const updatedItems = [...itemsArray];
+
+    //Toggle "isCompleted" field
+    updatedItems[itemIndex] = {
+      ...updatedItems[itemIndex],
+      isCompleted: !updatedItems[itemIndex].isCompleted
+    };
+
+    const {data: updateData, error: updateError} = await this.supabase
+      .from('shopping_lists')
+      .update({items: updatedItems})
+      .eq('list_id', listGUID)
+      .select()
+
+    if (updateError) console.error(updateError);
+
+    console.log(updatedItems[itemIndex].isCompleted)
+
+    return updateData;
+  };
 
   //Managing inventory
   async getItems(store: string){

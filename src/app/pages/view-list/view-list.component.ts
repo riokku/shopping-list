@@ -78,4 +78,8 @@ export class ViewListComponent {
     this.router.navigate(['/my-lists']);
   }
 
+  toggleCompletion(index: number, currentCompletionstatus: boolean){
+    this.supaService.toggleCompletion(this.listGUID, index, currentCompletionstatus);
+    this.listItems[index].isCompleted = !this.listItems[index].isCompleted;
+  }
 }

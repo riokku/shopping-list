@@ -42,12 +42,29 @@ img{
   .items-wrapper{
     font-size: 1.2rem;
     ul{
-      padding: 1rem;
+      padding-left: 0;
       list-style-type: none;
+      margin-top: 1rem;
+      li{
+        text-decoration: none;
+        font-weight: bold;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 4px;
+        &.completed{
+          text-decoration: line-through;
+          text-decoration-color: red;
+          text-decoration-thickness: 3px;
+          font-weight: normal;
+          border: none;
+        }
+        &:hover{
+          cursor: pointer;
+        }
+      }
     }
-    &:hover{
-      cursor: pointer;
-    }
+
   }
 }
 
