@@ -12,7 +12,7 @@
           <img class="m-auto" src="{{listDetails.store_logo}}" alt="{{listDetails.store_name}} logo"><br />
           <div class="list-metadata mb-3">
             <div>
-              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="calendar_month"></mat-icon> {{ listDetails.created_at | date:'short' }}
+              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="calendar_month"></mat-icon> {{ listDetails.created_at | date:'medium ' }}
             </div>
             <div>
               <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="person"></mat-icon> {{ listDetails.created_by_name }}
