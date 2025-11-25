@@ -9,11 +9,11 @@
         <span class="site-title">Cartographer</span>
       </a>
     </div>
-    <div class="nav-options">
+    <div class="nav-options" *ngIf="activeSession">
       <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      <a *ngIf="activeSession" mat-button routerLink="/create-list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Create List</a>
-      <a *ngIf="activeSession" mat-button routerLink="/my-lists" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Lists</a>
-      <a *ngIf="activeSession" mat-button routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Admin</a>
+      <a mat-button routerLink="/create-list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Create List</a>
+      <a mat-button routerLink="/my-lists" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Lists</a>
+      <a mat-button routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Admin</a>
     </div>
     <div>
       <div>

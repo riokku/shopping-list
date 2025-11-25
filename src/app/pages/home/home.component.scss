@@ -51,7 +51,7 @@
     font-size: 1.25rem;
   }
   a{
-    width: clamp(100px, 200px, 100%);
+    width: fit-content;
   }
 }
 
