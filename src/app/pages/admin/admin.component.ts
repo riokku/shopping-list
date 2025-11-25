@@ -117,12 +117,4 @@ export class AdminComponent implements OnInit {
     this.storeItemsResults = this.storeItems.filter(item => item.item_name.toLowerCase().includes(this.searchInput.toLowerCase()));
   }
 
-  openDialog() {
-    this.dialog.open(AddInventoryDialogComponent, {
-      width: '650px',
-      backdropClass: 'backdrop',
-      data: { title: 'Edit Inventory Item' }
-    });
-  }
-
 }

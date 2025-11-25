@@ -8,7 +8,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogFinalizeComponent } from '../../shared/components/dialog-finalize/dialog-finalize.component';
 
 @Component({
   selector: 'app-view-list',
@@ -28,7 +29,7 @@ export class ViewListComponent {
 
   public listGUID: string | undefined;
   public listDetails: any;
-  public listItems: any;
+  public listItems: any[] = [];
   public groupedItems: Record<string, ShoppingListItemModel[]> = {};
   public aisleOrder: string[] = [];
 
@@ -36,7 +37,8 @@ export class ViewListComponent {
       private route: ActivatedRoute,
       private supaService: SupabaseService,
       private listDataDefaultService: ListDataDefaultService,
-      private router: Router
+      private router: Router, 
+      private dialog: MatDialog
     ) {
       this.route.params.subscribe((params: Params) => {
         this.listGUID = params['guid'];
@@ -81,5 +83,27 @@ export class ViewListComponent {
   toggleCompletion(index: number, currentCompletionstatus: boolean){
     this.supaService.toggleCompletion(this.listGUID, index, currentCompletionstatus);
     this.listItems[index].isCompleted = !this.listItems[index].isCompleted;
+    const isCompleted = this.checkCompletedList();
   }
+
+  checkCompletedList(){
+    const isCompleted =  this.listItems.every(item => item.isCompleted);
+
+    if(isCompleted){
+      this.dialog.open(DialogFinalizeComponent, {
+        width: '450px',
+        backdropClass: 'backdrop'
+      }).afterClosed().subscribe(author => {
+        if (author) {
+          alert("yes")
+        } else {
+          alert("no")
+        }
+      });
+    }
+   
+  }
+
+
+
 }
