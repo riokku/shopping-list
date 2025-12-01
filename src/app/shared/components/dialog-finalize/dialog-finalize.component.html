@@ -5,12 +5,21 @@
   <p>
     What would you like to do with this list?
   </p>
-  <button mat-fab extended color="accent" type="button" (click)="close()">
-    <mat-icon>rocket_launch</mat-icon>
-    Go back to list
-  </button>
-  <button mat-fab extended color="accent" type="button" (click)="triggerSubmit()">
-    <mat-icon>rocket_launch</mat-icon>
-    Delete list
-  </button>
+  <div class="action-wrapper">
+    <button mat-fab extended color="primary" type="button" (click)="close()">
+      <mat-icon>arrow_back</mat-icon>
+      Go back
+    </button>
+    <button mat-fab extended color="accent" type="button" (click)="deleteList()">
+      <mat-icon>delete</mat-icon>
+      Delete
+    </button>
+  </div>  
+</div>
+<div class="confetti-container">
+  <div 
+    class="confetti" 
+    *ngFor="let x of [].constructor(10); let i = index"
+    [style.--i]="i"
+  ></div>
 </div>

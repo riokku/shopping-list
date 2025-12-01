@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,14 +13,15 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     MatInputModule,
     MatIcon,
-    MatButtonModule
+    MatButtonModule,
+    CommonModule
   ],
   templateUrl: './dialog-finalize.component.html',
   styleUrl: './dialog-finalize.component.scss'
 })
 export class DialogFinalizeComponent {
 
-  author: string | undefined = undefined;
+  listID: string | undefined = undefined;
 
   constructor(
     public dialogRef: MatDialogRef<DialogFinalizeComponent>,
@@ -30,8 +32,8 @@ export class DialogFinalizeComponent {
     this.dialogRef.close();
   }
 
-  triggerSubmit() {
-    this.dialogRef.close(this.author);
+  deleteList() {
+    this.dialogRef.close(true);
   }
 
 }

@@ -79,3 +79,7 @@ mat-divider{
   color: #505050;
   border-top-width: 4px;
 }
+
+::ng-deep .backdrop{
+  background-color: rgba(0, 0, 0, 0.8);
+}

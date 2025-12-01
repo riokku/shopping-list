@@ -10,6 +10,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogFinalizeComponent } from '../../shared/components/dialog-finalize/dialog-finalize.component';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-view-list',
@@ -83,7 +84,7 @@ export class ViewListComponent {
   toggleCompletion(index: number, currentCompletionstatus: boolean){
     this.supaService.toggleCompletion(this.listGUID, index, currentCompletionstatus);
     this.listItems[index].isCompleted = !this.listItems[index].isCompleted;
-    const isCompleted = this.checkCompletedList();
+    this.checkCompletedList();
   }
 
   checkCompletedList(){
@@ -91,19 +92,15 @@ export class ViewListComponent {
 
     if(isCompleted){
       this.dialog.open(DialogFinalizeComponent, {
-        width: '450px',
-        backdropClass: 'backdrop'
-      }).afterClosed().subscribe(author => {
-        if (author) {
-          alert("yes")
-        } else {
-          alert("no")
-        }
-      });
-    }
-   
+          width: '450px',
+          backdropClass: 'backdrop'
+        }).afterClosed().subscribe(listID => {          
+          if (listID) {
+            this.deleteList()           
+          } else {
+            console.error("Issue getting list id.");
+          }
+        });  
+    }   
   }
-
-
-
 }
