@@ -2,10 +2,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
 
+@font-face {
+  font-family: 'cartoon';
+  //src: url('assets/Biscuit\ Glitch.ttf') format('woff');
+  //  src: url('assets//SuperMario256.ttf') format('woff');
+  src: url('assets/Jumps\ Winter.ttf') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'cartoon', sans-serif;
+}
+
+
 html, body { height: 100%; }
 body {
   margin: 0;
-  font-family: "Josefin Sans", sans-serif;
+  //font-family: "Josefin Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }

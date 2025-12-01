@@ -1,3 +1,7 @@
+*, .mdc-button__label{
+  font-family: 'cartoon', sans-serif;
+}
+
 .site-title {
   font-size: 2rem;
   font-weight: 500;
@@ -37,8 +41,7 @@ img{
 }
 
 .active {
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 3px solid #ff4081;
+  border: 2px solid #333;
 }
 
 .sidenav-container {
@@ -61,4 +64,8 @@ img{
   background-color: rgba(0,0,0,0);
   padding: 1rem 5rem;
   height: fit-content
+}
+
+.mat-mdc-button{
+  border-radius: 0;
 }
