@@ -1,6 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
-
+@use 'theme';
+@layer base, material, overrides;
 
 @font-face {
   font-family: 'cartoon';
@@ -11,15 +10,24 @@
   font-style: normal;
 }
 
-body {
-  font-family: 'cartoon', sans-serif;
+//Angular Material overrides
+@layer overrides {
+  //Remove button border radius
+  .mat-mdc-extended-fab {
+    --mdc-extended-fab-container-shape: 4px;
+  }
 }
 
+*{
+  font-family: 'cartoon', sans-serif !important;
+}
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  //font-family: "Josefin Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
@@ -45,7 +53,3 @@ body {
     color: #fff;
   }
 }
-
-
-//mdc-snackbar mat-mdc-snack-bar-container mdc-snackbar--open ng-tns-c495777134-4 ng-trigger ng-trigger-state success-snackbar ng-star-inserted
-// ng-tns-c495777134-5

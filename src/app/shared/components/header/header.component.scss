@@ -1,5 +1,6 @@
-*, .mdc-button__label{
+*{
   font-family: 'cartoon', sans-serif;
+  color: var(--bs-body-color);
 }
 
 .site-title {
@@ -68,4 +69,8 @@ img{
 
 .mat-mdc-button{
   border-radius: 0;
+}
+
+.mat-mdc-button:not(:disabled) {
+  color: var(--bs-body-color);
 }
