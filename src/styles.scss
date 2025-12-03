@@ -16,11 +16,19 @@
   .mat-mdc-extended-fab {
     --mdc-extended-fab-container-shape: 4px;
   }
+  :root{
+    --mdc-dialog-container-elevation: 10px 10px var(--primary-200) !important;
+  }
 }
 
 *{
   font-family: 'cartoon', sans-serif !important;
 }
+
+.material-icons {
+    font-family: 'Material Icons' !important;
+}
+
 
 html, body {
   height: 100%;
