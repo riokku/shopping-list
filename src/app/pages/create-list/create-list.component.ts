@@ -156,7 +156,7 @@ export class CreateListComponent {
 
   finalizeList(){
     this.dialog.open(DialogComponent, {
-        width: '450px',
+        width: 'clamp(450px, 60%, 800px)',
         backdropClass: 'backdrop'
       }).afterClosed().subscribe(author => {
         if (author) {

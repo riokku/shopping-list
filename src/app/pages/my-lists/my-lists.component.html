@@ -6,16 +6,29 @@
     <div *ngIf="!loading && shoppingLists.length === 0">No lists found.</div>
 
     <div *ngFor="let list of shoppingLists" class="list-wrapper">
-      <a href="/list/{{list.list_id}}">
-        <img src="{{list.store_logo}}" alt="{{list.store_name}}"/>
-        <div>
+      <a href="/list/{{ list.list_id }}">
+        <img src="{{ list.store_logo }}" alt="{{ list.store_name }}" />
+        <!-- <div>
           <p class="m-2">
             {{list.store_address}}
           </p>
-        </div>
-        <div>
-          <small>Created {{ list.created_at | date:'short' }} by {{ list.created_by_name }}</small>
-        </div>
+        </div> -->
+        <p>
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="calendar_month"
+          ></mat-icon>
+          {{ normalizeDate(list.created_at) | date : "medium" }}
+        </p>
+        <p class="mb-0">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="person"
+          ></mat-icon>
+          {{ list.created_by_name }}
+        </p>
       </a>
     </div>
   </div>

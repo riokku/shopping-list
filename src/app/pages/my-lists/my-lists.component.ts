@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { SupabaseService } from '../../shared/services/supa/supa.service';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-my-lists',
   standalone: true,
   imports: [
     CommonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIcon
   ],
   templateUrl: './my-lists.component.html',
   styleUrl: './my-lists.component.scss'
@@ -29,6 +31,10 @@ export class MyListsComponent {
     } finally {
       this.loading = false;
     }
+  }
+
+   normalizeDate(date: string) {
+    return date.replace(/(\.\d{3})\d+/, '$1');
   }
 
 }

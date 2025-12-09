@@ -9,7 +9,7 @@
     <mat-label>Pick any name!</mat-label>
     <input matInput name="author" [(ngModel)]="author">
   </mat-form-field>
-  <button mat-fab extended color="accent" type="button" [disabled]="!author?.trim()" (click)="triggerSubmit()">
+  <button mat-fab extended color="primary" type="button" [disabled]="!author?.trim()" (click)="triggerSubmit()">
     <mat-icon>rocket_launch</mat-icon>
     All done!
   </button>
