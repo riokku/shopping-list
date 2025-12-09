@@ -1,0 +1,62 @@
+@use '@angular/material' as mat;
+
+// -------------------------------
+// 1. Define your PRIMARY palette
+// -------------------------------
+$navy-primary-palette: mat.define-palette((
+  50:  #e0e0ff,
+  100: #b3b3ff,
+  200: #8080ff,
+  300: #4d4dff,
+  400: #2626ff,
+  500: #000080,
+  600: #000073,
+  700: #00005c,
+  800: #000046,
+  900: #00002e,
+  contrast: (
+    50:  #000,
+    100: #000,
+    200: #fff,
+    300: #fff,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+  )
+));
+
+// Default accent & warn palettes (you can customize later)
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$my-warn:   mat.define-palette(mat.$red-palette);
+
+// -------------------------------
+// 2. Create the theme
+// -------------------------------
+$custom-ang-mat-theme: mat.define-light-theme((
+  color: (
+    primary: $navy-primary-palette,
+    accent: $my-accent,
+    warn: $my-warn,
+  )
+));
+
+// -------------------------------
+// 3. Apply the theme
+// -------------------------------
+@include mat.core();
+@include mat.all-component-themes($custom-ang-mat-theme);
+
+:root {
+  --primary-100: #{mat.get-color-from-palette($navy-primary-palette, 100)};
+  --primary-200: #{mat.get-color-from-palette($navy-primary-palette, 200)};
+  --primary-300: #{mat.get-color-from-palette($navy-primary-palette, 300)};
+  --primary-400: #{mat.get-color-from-palette($navy-primary-palette, 400)};
+  --primary-500: #{mat.get-color-from-palette($navy-primary-palette, 500)};
+  --primary-600: #{mat.get-color-from-palette($navy-primary-palette, 600)};
+  --primary-700: #{mat.get-color-from-palette($navy-primary-palette, 700)};
+  --primary-800: #{mat.get-color-from-palette($navy-primary-palette, 800)};
+}
+
