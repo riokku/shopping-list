@@ -103,4 +103,10 @@ export class ViewListComponent {
         });  
     }   
   }
+
+ normalizeDate(date: string) {
+  return date.replace(/(\.\d{3})\d+/, '$1');
+}
+
+
 }
