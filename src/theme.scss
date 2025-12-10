@@ -50,6 +50,7 @@ $custom-ang-mat-theme: mat.define-light-theme((
 @include mat.all-component-themes($custom-ang-mat-theme);
 
 :root {
+  --primary-50: #{mat.get-color-from-palette($navy-primary-palette, 50)};
   --primary-100: #{mat.get-color-from-palette($navy-primary-palette, 100)};
   --primary-200: #{mat.get-color-from-palette($navy-primary-palette, 200)};
   --primary-300: #{mat.get-color-from-palette($navy-primary-palette, 300)};

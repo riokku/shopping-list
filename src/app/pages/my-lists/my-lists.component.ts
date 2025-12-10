@@ -30,7 +30,7 @@ export class MyListsComponent {
       this.error = err.message;
     } finally {
       this.loading = false;
-    }
+    }    
   }
 
    normalizeDate(date: string) {

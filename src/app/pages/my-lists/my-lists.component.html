@@ -4,8 +4,7 @@
     <div *ngIf="loading"><mat-spinner></mat-spinner></div>
     <div *ngIf="error">{{ error }}</div>
     <div *ngIf="!loading && shoppingLists.length === 0">No lists found.</div>
-
-    <div *ngFor="let list of shoppingLists" class="list-wrapper">
+    <div *ngFor="let list of shoppingLists; let i = index" class="list-wrapper">
       <a href="/list/{{ list.list_id }}">
         <img src="{{ list.store_logo }}" alt="{{ list.store_name }}" />
         <!-- <div>
@@ -19,9 +18,9 @@
             aria-label="Example home icon"
             fontIcon="calendar_month"
           ></mat-icon>
-          {{ normalizeDate(list.created_at) | date : "medium" }}
+          {{ normalizeDate(list.created_at) | date : "fullDate" }}
         </p>
-        <p class="mb-0">
+        <p>
           <mat-icon
             aria-hidden="false"
             aria-label="Example home icon"
@@ -29,6 +28,9 @@
           ></mat-icon>
           {{ list.created_by_name }}
         </p>
+        <p class="position-marker">
+          #{{i + 1}}
+        </p>    
       </a>
     </div>
   </div>
