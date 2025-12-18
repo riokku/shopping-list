@@ -27,13 +27,15 @@
                 formControlName="item"
                 name="item"
                 [matAutocomplete]="auto"
+                [(ngModel)]="searchInput"
+                (input)="updateResults()"
                 required>
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displaySelectedItem">
-                   @for (storeItem of storeItems; track storeItem) {
+                   @for (storeItem of storeItemsResults; track storeItem) {
                     <mat-option [value]="storeItem">
                       <div class="row store-selection-wrapper">
                         <div class="col-12">
-                          <strong>{{storeItem.item_name}}</strong> (aisle: {{ storeItem.item_aisle}})
+                          <strong>{{storeItem.item_name}}</strong> <!--(aisle: {{ storeItem.item_aisle}})-->
                         </div>
                       </div>
                     </mat-option>
@@ -58,11 +60,11 @@
                 <mat-icon>add_box</mat-icon>
                 Add item
               </button>
-              <button mat-fab extended color="primary" type="button" [disabled]="shoppingForm.invalid" *ngIf="isEditing()" (click)="updateItem()">
+              <button mat-fab extended class="me-2" color="primary" type="button" [disabled]="shoppingForm.invalid" *ngIf="isEditing()" (click)="updateItem()">
                 <mat-icon>sync</mat-icon>
                 Update item
               </button>
-              <button mat-fab extended color="warn" type="button" [disabled]="shoppingForm.invalid" *ngIf="isEditing()" (click)="cancelUpdate()">
+              <button mat-fab extended color="accent" type="button" [disabled]="shoppingForm.invalid" *ngIf="isEditing()" (click)="cancelUpdate()">
                 <mat-icon>cancel</mat-icon>
                 Cancel item
               </button>
@@ -85,16 +87,20 @@
           <ul class="selected-item-list">
             <li *ngFor="let selectedItem of selectedItems; let i = index" [ngClass]="{'is-being-edited': isEditing()}">
               <div class="in-list-item-details">
-                <strong>{{selectedItem.item.item_name}}</strong>
-                (Aisle: {{selectedItem.item.item_aisle}})<br />
-                Quantity: {{selectedItem.quantity}}<br />
-                <span *ngIf="selectedItem.notes">Notes: {{selectedItem.notes}}</span>
+                <p class="mb-2">
+                  <strong>{{selectedItem.item.item_name}}</strong> ({{selectedItem.quantity}})<br />
+                  <!-- (Aisle: {{selectedItem.item.item_aisle}})<br /> -->
+                </p>                                
+                <p *ngIf="selectedItem.notes" class="d-flex align-items-center mb-0">
+                  <mat-icon class="me-2">notes</mat-icon>
+                  <span class="fst-italic">{{selectedItem.notes}}</span>
+                </p>
               </div>
               <div class="in-list-item-actions">
                 <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" [disabled]="isEditing()" (click)="setFormUpdateItem(selectedItem, i)">
                   <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-mini-fab aria-label="delete item" color="warn" [disabled]="isEditing()" (click)="deleteItem(selectedItem)">
+                <button mat-mini-fab aria-label="delete item" color="accent" [disabled]="isEditing()" (click)="deleteItem(selectedItem)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>

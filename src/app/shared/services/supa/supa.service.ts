@@ -160,8 +160,10 @@ export class SupabaseService {
     if (error) console.error(error);
   }
 
-  async toggleCompletion(listGUID: string | undefined, itemIndex: number, currentStatus: boolean){
+  async toggleCompletion(listGUID: string | undefined, itemIndex: number){
 
+    console.log("supa", itemIndex);
+    
     //Retrieve entire "items" object
     const { data: incomingData, error: incomingError } = await this.supabase
       .from('shopping_lists')

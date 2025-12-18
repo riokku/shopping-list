@@ -47,7 +47,9 @@ export class CreateListComponent {
   filteredOptions!: Observable<StoreModel[]>;
   selectedItems: any[] = [];
   storeItems: any[] = [];
-
+  storeItemsResults: any[] = [];
+  searchInput: string = '';
+  
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -69,6 +71,8 @@ export class CreateListComponent {
 
   async ngOnInit(){
     this.storeItems = await this.supaService.getStoreItems('safeway_pullman');
+    this.storeItemsResults = this.storeItems;
+
   }
 
   onSubmit() {
@@ -82,6 +86,7 @@ export class CreateListComponent {
         notes: '',
         isCompleted: false
       });
+      this.searchInput = '';
     } else {
       alert("This item appears to be in your list already");
     }
@@ -167,6 +172,9 @@ export class CreateListComponent {
       });
   }
 
+  updateResults(){
+    this.storeItemsResults = this.storeItems.filter(item => item.item_name.toLowerCase().includes(this.searchInput.toLowerCase()));
+  }
 
   submitList(author: string){
     this.supaService.submitList("Safeway", "430 SE Bishop Blvd, Pullman, WA 99163", "https://s29.q4cdn.com/239956855/files/doc_downloads/mediaAssets/safeway/1-Swy_Horiz_CMYK.png", this.selectedItems, author);

@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-12 d-flex justify-content-center">
         <div class="list-wrapper">
-          <div class="back">
-            <a mat-fab extended color="primary" href="/my-lists">
+          <div class="back mb-3">
+            <a mat-fab extended color="secondary" href="/my-lists">
               <mat-icon>arrow_back</mat-icon>
               Back
             </a>
@@ -29,9 +29,14 @@
               </div>
               <div class="items-wrapper">
                 <ul>
-                  <li *ngFor="let item of groupedItems[aisle]; let i = index" (click)="toggleCompletion(i, item.isCompleted)" [ngClass]="{'completed': item.isCompleted}">
-                    {{ item.item.item_name }} ({{ item.quantity }}) <br />
-                    Notes: {{ item.notes}}
+                  <li *ngFor="let item of groupedItems[aisle]; let i = index" (click)="toggleCompletion(item)" [ngClass]="{'completed': item.isCompleted}">
+                    <p class="mb-1">
+                    {{ item.item.item_name }} ({{ item.quantity }})
+                    </p>
+                    <p class="d-flex align-items-center mb-0">
+                      <mat-icon class="me-2">notes</mat-icon>
+                      <span class="fst-italic">{{item.notes}}</span>
+                    </p>
                     <!-- <br /> IsCompleted: {{ item.isCompleted}} -->
                   </li>
                 </ul>
@@ -49,8 +54,6 @@
     </div>
   </div>
 </section>
-
-
 <div class="spinner" *ngIf="!listDetails">
   <mat-spinner></mat-spinner>
 </div>
