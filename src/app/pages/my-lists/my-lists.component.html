@@ -28,9 +28,19 @@
           ></mat-icon>
           {{ list.created_by_name }}
         </p>
-        <p class="position-marker">
-          #{{i + 1}}
-        </p>    
+        <p class="position-marker">#{{ i + 1 }}</p>
+      </a>
+    </div>
+    <div class="">
+      <a
+        mat-fab
+        extended
+        color="primary"
+        type="button"
+        href="/create-list"
+      >
+        <mat-icon>data_saver_on</mat-icon>
+        Create new list
       </a>
     </div>
   </div>

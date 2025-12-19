@@ -3,6 +3,7 @@ import { SupabaseService } from '../../shared/services/supa/supa.service';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-my-lists',
@@ -10,7 +11,8 @@ import { MatIcon } from '@angular/material/icon';
   imports: [
     CommonModule,
     MatProgressSpinnerModule,
-    MatIcon
+    MatIcon,
+    MatButtonModule
   ],
   templateUrl: './my-lists.component.html',
   styleUrl: './my-lists.component.scss'

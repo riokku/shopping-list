@@ -1,96 +1,148 @@
 <section>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
-        <h1>
-          Admin dashboard:
-        </h1>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-4">
         <div class="submit-form-wrapper">
-          <form [formGroup]="adminForm" class="store-item-picker-form p-4" (ngSubmit)="onSubmit()"  #formElement="ngForm">
-            <h2 *ngIf="isEditing()">
-              Edit item
-            </h2>
-            <h2 *ngIf="!isEditing()">
-              Add item
-            </h2>
+          <h1 class="p-4 mb-0">Admin dashboard</h1>
+          <div class="form-header">
+            <h2 *ngIf="isEditing()" class="mb-0">Edit item</h2>
+            <h2 *ngIf="!isEditing()" class="mb-0">Add item</h2>
+          </div>
+          <form
+            [formGroup]="adminForm"
+            class="store-item-picker-form p-4"
+            (ngSubmit)="onSubmit()"
+            #formElement="ngForm"
+          >
             <mat-form-field class="form-field-full-width">
               <mat-label>Name</mat-label>
-              <input
-               matInput
-               formControlName="name"
-               name="name"
-               required
-               >
-              <mat-error *ngIf="adminForm.get('name')?.hasError('required') && (adminForm.get('name')?.touched || adminForm.get('name')?.dirty)">
+              <input matInput formControlName="name" name="name" required />
+              <mat-error
+                *ngIf="
+                  adminForm.get('name')?.hasError('required') &&
+                  (adminForm.get('name')?.touched ||
+                    adminForm.get('name')?.dirty)
+                "
+              >
                 Name is required
               </mat-error>
             </mat-form-field>
             <mat-form-field class="form-field-full-width">
               <mat-label>Aisle</mat-label>
-              <input type="text"
-              placeholder="Pick one"
-              matInput
-              formControlName="aisle"
-              name="aisle"
-              [matAutocomplete]="auto"
-              required>
+              <input
+                type="text"
+                placeholder="Pick one"
+                matInput
+                formControlName="aisle"
+                name="aisle"
+                [matAutocomplete]="auto"
+                required
+              />
               <mat-autocomplete #auto="matAutocomplete">
                 @for (aisle of aisleOptions; track aisle) {
-                  <mat-option [value]="aisle">
-                    <div class="row store-selection-wrapper">
-                      <div class="col-12">
-                        <strong>{{aisle}}</strong>
-                      </div>
+                <mat-option [value]="aisle">
+                  <div class="row store-selection-wrapper">
+                    <div class="col-12">
+                      <strong>{{ aisle }}</strong>
                     </div>
-                  </mat-option>
+                  </div>
+                </mat-option>
                 }
               </mat-autocomplete>
-              <mat-error *ngIf="adminForm.get('aisle')?.hasError('required') && (adminForm.get('aisle')?.touched || adminForm.get('aisle')?.dirty)">
+              <mat-error
+                *ngIf="
+                  adminForm.get('aisle')?.hasError('required') &&
+                  (adminForm.get('aisle')?.touched ||
+                    adminForm.get('aisle')?.dirty)
+                "
+              >
                 Aisle is required
               </mat-error>
             </mat-form-field>
-            <button mat-fab extended color="primary" type="submit" [disabled]="adminForm.invalid" *ngIf="!isEditing()">
+            <button
+              mat-fab
+              extended
+              color="primary"
+              type="submit"
+              [disabled]="adminForm.invalid"
+              *ngIf="!isEditing()"
+            >
               <mat-icon>add_box</mat-icon>
               Add item
             </button>
-            <button mat-fab extended color="primary" type="button" [disabled]="adminForm.invalid" *ngIf="isEditing()" (click)="updateItem()">
+            <button
+              mat-fab
+              extended
+              color="primary"
+              type="button"
+              class="me-2"
+              [disabled]="adminForm.invalid"
+              *ngIf="isEditing()"
+              (click)="updateItem()"
+            >
               <mat-icon>sync</mat-icon>
               Update item
             </button>
-            <button mat-fab extended color="accent" type="button" [disabled]="adminForm.invalid" *ngIf="isEditing()" (click)="cancelUpdate()">
+            <button
+              mat-fab
+              extended
+              color="accent"
+              type="button"
+              [disabled]="adminForm.invalid"
+              *ngIf="isEditing()"
+              (click)="cancelUpdate()"
+            >
               <mat-icon>cancel</mat-icon>
-              Cancel item
+              Cancel
             </button>
           </form>
         </div>
       </div>
       <div class="col-8">
-        <h2>
-          Inventory catalogue:
-        </h2>
-        <div class="actions-wrapper">
-          <mat-form-field class="example-full-width">
-            <mat-label>Search inventory</mat-label>
-            <input matInput type="text" (input)="updateResults()" [(ngModel)]="searchInput" placeholder="Ex. Pizza">
-          </mat-form-field>
-        </div>
-        <div class="item-wrapper mb-2" *ngFor="let item of storeItemsResults; let i = index">
-          <div>
-            <div>
-              <strong>{{ item?.item_name }}</strong> ({{ item.item_aisle }})
-            </div>
+        <div class="catalog-wrapper p-4">
+          <h2>Catalogue</h2>
+          <div class="actions-wrapper">
+            <mat-form-field class="example-full-width w-100">
+              <mat-label>Search inventory</mat-label>
+              <input
+                matInput
+                type="text"
+                (input)="updateResults()"
+                [(ngModel)]="searchInput"
+                placeholder="Ex. Pizza"
+              />
+            </mat-form-field>
           </div>
-          <div class="in-list-item-actions">
-            <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" [disabled]="isEditing()" (click)="setFormUpdateItem(item, i)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-mini-fab aria-label="delete item" [disabled]="isEditing()" (click)="deleteItem(item, i)">
-              <mat-icon>delete</mat-icon>
-            </button>
+          <div
+            class="item-wrapper mb-2"
+            *ngFor="let item of storeItemsResults; let i = index"
+          >
+            <div>
+              <div>
+                <strong>{{ item?.item_name }}</strong> (Aisle:
+                {{ item.item_aisle }})
+              </div>
+            </div>
+            <div class="in-list-item-actions">
+              <button
+                mat-mini-fab
+                aria-label="edit item"
+                color="primary"
+                class="me-2"
+                [disabled]="isEditing()"
+                (click)="setFormUpdateItem(item, i)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-mini-fab
+                aria-label="delete item"
+                [disabled]="isEditing()"
+                (click)="deleteItem(item, i)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
       </div>
