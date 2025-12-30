@@ -25,7 +25,9 @@ import { Router } from '@angular/router';
     AsyncPipe,
     NgIf,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    MatListModule,
+    MatIconModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -35,6 +37,7 @@ export class HeaderComponent {
   isHandset$: Observable<boolean>;
   activeSession: Session | null = null;
   isAdmin: boolean = false;
+  mobileMenuOpen = false;
 
   constructor(
     breakpointObserver: BreakpointObserver,

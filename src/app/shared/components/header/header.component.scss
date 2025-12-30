@@ -1,5 +1,4 @@
 *{
-  font-family: 'cartoon', sans-serif;
   color: var(--bs-body-color);
 }
 
@@ -14,7 +13,7 @@ img{
   max-height: 40px;
 }
 
-.desktop-nav {
+.desktop-nav, .mobile-nav  {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,19 +53,6 @@ img{
   width: 250px;
 }
 
-@media (max-width: 599px) {
-  .sidenav-container {
-    height: calc(100vh - 56px);
-    margin-top: 56px;
-  }
-}
-
-.mat-toolbar{
-  background-color: rgba(0,0,0,0);
-  padding: 1rem 5rem;
-  height: fit-content
-}
-
 .mat-mdc-button{
   border-radius: 0;
 }
@@ -77,4 +63,80 @@ img{
 
 .mat-icon{
   font-family: 'Material Icons';
+}
+
+//Mobile nav
+
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(0,0,0,0);
+  height: fit-content;
+  @media (min-width: 1000px) {
+     padding: 1rem 5rem;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .site-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+}
+
+.nav-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+// Mobile menu styles
+.mobile-menu-overlay {
+  position: fixed;
+  top: 64px; // Height of toolbar
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.2s ease-in;
+}
+
+.mobile-menu {
+  background-color: white;
+  width: 280px;
+  height: 100%;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+  padding: 1rem;
+}
+
+.mdc-list-item--with-leading-icon .mdc-list-item__start {
+  margin-right: 1rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.active {
+  background-color: rgba(0, 0, 0, 0.04);
 }

@@ -1,4 +1,19 @@
 <mat-toolbar>
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" *ngIf="isHandset$ | async">
+    <button mat-icon-button (click)="mobileMenuOpen = !mobileMenuOpen" aria-label="Toggle menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="site-logo">
+      <a href="/">
+        <span class="site-title">Cartographer</span>
+      </a>
+    </div>
+    <span class="spacer"></span>
+    <button *ngIf="activeSession" mat-icon-button matTooltip="Logout" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
   <!-- Desktop Navigation -->
   <div class="desktop-nav" *ngIf="!(isHandset$ | async)">
     <div class="site-logo">
@@ -27,5 +42,34 @@
     </div>
   </div>
 </mat-toolbar>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" *ngIf="(isHandset$ | async) && mobileMenuOpen" (click)="mobileMenuOpen = false">
+  <div class="mobile-menu" (click)="$event.stopPropagation()">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="mobileMenuOpen = false">
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span matListItemTitle>Home</span>
+      </a>
+      <a mat-list-item routerLink="/create-list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="mobileMenuOpen = false" *ngIf="activeSession">
+        <mat-icon matListItemIcon>add</mat-icon>
+        <span matListItemTitle>Create List</span>
+      </a>
+      <a mat-list-item routerLink="/my-lists" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="mobileMenuOpen = false" *ngIf="activeSession">
+        <mat-icon matListItemIcon>list</mat-icon>
+        <span matListItemTitle>My Lists</span>
+      </a>
+      <a mat-list-item routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="mobileMenuOpen = false" *ngIf="activeSession">
+        <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
+        <span matListItemTitle>Admin</span>
+      </a>
+      <mat-divider *ngIf="!activeSession"></mat-divider>
+      <a mat-list-item [routerLink]="'/login'" (click)="mobileMenuOpen = false" *ngIf="!activeSession">
+        <mat-icon matListItemIcon>login</mat-icon>
+        <span matListItemTitle>Sign In</span>
+      </a>
+    </mat-nav-list>
+  </div>
+</div>
 <!-- Responsive spacer -->
 <span class="spacer"></span>
