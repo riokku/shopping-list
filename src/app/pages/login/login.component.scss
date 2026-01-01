@@ -2,11 +2,12 @@
   padding: 5rem;
   display: grid;
   place-content: center;
+  height: 100%;
 }
 
 mat-card{
   padding: 2rem;
-  width: clamp(400px, 550px, 1200px);
+  width: clamp(400px, 550px, 100%);
   background-color: rgba(255, 255, 255, 0.9);
   border: 2px solid #333;
   box-shadow: 10px 10px #333;
@@ -14,4 +15,21 @@ mat-card{
 
 button{
   width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .page-wrapper{
+    padding: 0;
+  }
+  div.col-12{
+    padding: 0;
+  }
+  .button-group{
+    gap: 0.75rem;
+  }
+
+  mat-card{
+    width: 400px;
+    max-width: 100%;
+  }
 }

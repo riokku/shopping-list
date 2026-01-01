@@ -1,17 +1,14 @@
 <mat-toolbar>
   <!-- Mobile Navigation -->
   <div class="mobile-nav" *ngIf="isHandset$ | async">
-    <button mat-icon-button (click)="mobileMenuOpen = !mobileMenuOpen" aria-label="Toggle menu">
-      <mat-icon>menu</mat-icon>
-    </button>
     <div class="site-logo">
       <a href="/">
         <span class="site-title">Cartographer</span>
       </a>
     </div>
     <span class="spacer"></span>
-    <button *ngIf="activeSession" mat-icon-button matTooltip="Logout" (click)="logout()">
-      <mat-icon>logout</mat-icon>
+    <button mat-icon-button (click)="mobileMenuOpen = !mobileMenuOpen" aria-label="Toggle menu">
+      <mat-icon>menu</mat-icon>
     </button>
   </div>
   <!-- Desktop Navigation -->
@@ -63,8 +60,13 @@
         <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
         <span matListItemTitle>Admin</span>
       </a>
+      <div class="w-100 d-flex justify-content-center">
+        <button *ngIf="activeSession" mat-icon-button matTooltip="Logout" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
       <mat-divider *ngIf="!activeSession"></mat-divider>
-      <a mat-list-item [routerLink]="'/login'" (click)="mobileMenuOpen = false" *ngIf="!activeSession">
+      <a mat-list-item [routerLink]="'/login'" (click)="mobileMenuOpen = false" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="!activeSession">
         <mat-icon matListItemIcon>login</mat-icon>
         <span matListItemTitle>Sign In</span>
       </a>

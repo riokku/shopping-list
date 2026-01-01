@@ -26,16 +26,6 @@ img{
   gap: 1rem;
 }
 
-.site-logo{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  a{
-    text-decoration: none;
-    color: inherit;
-  }
-}
-
 .spacer {
   flex: 1 1 auto;
 }
@@ -93,7 +83,6 @@ mat-toolbar {
 
   .site-title {
     font-size: 1.25rem;
-    font-weight: 500;
   }
 }
 
@@ -140,3 +129,16 @@ mat-toolbar {
 .active {
   background-color: rgba(0, 0, 0, 0.04);
 }
+
+@media (max-width: 1100px) {
+  .site-logo{
+    widtH: 100%;
+    .site-title {
+      font-size: 1.5rem;
+    }
+  } 
+}
+
+.active > .mdc-list-item__start{
+  color: var(--primary-400);
+} 

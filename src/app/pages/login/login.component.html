@@ -1,76 +1,78 @@
 <div class="page-wrapper">
-  <div class="row" *ngIf="!loggedIn && !activeSession">
-    <div class="col-12">
-      <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
-        <mat-card>
-          <mat-card-title class="mb-3">Sign Up</mat-card-title>
-          <mat-form-field appearance="outline" class="full-width">
+  <div class="container-fluid">
+    <div class="row" *ngIf="!loggedIn && !activeSession">
+      <div class="col-12">
+        <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+          <mat-card>
+            <mat-card-title class="mb-3">Sign Up</mat-card-title>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="email" required>
+              <mat-error *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+                Valid email is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" formControlName="password" required>
+              <mat-error *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+                Password is required (min 6 characters)
+              </mat-error>
+            </mat-form-field>
+            <div class="row pt-2 button-group">
+              <div class="col-12 col-md-6 col-lg-4">
+                <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">
+                  Sign Up
+                </button>
+              </div>
+              <div class="col-12 col-md-6 col-lg-8">
+                <button mat-raised-button color="secondary" type=button (click)="switchMode()">
+                  Existing user? Sign in.
+                </button>
+              </div>
+            </div>
+          </mat-card>
+        </form>
+      </div>
+    </div>
+    <div class="row" *ngIf="loggedIn && !activeSession">
+      <div class="col-12">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <mat-card>
+            <mat-card-title class="mb-3">Sign In</mat-card-title>
+            <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput type="email" formControlName="email" required>
-            <mat-error *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
-              Valid email is required
-            </mat-error>
+            <input matInput formControlName="email" type="email" required>
+            <mat-error *ngIf="loginForm.get('email')?.invalid">Invalid email</mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Password</mat-label>
-            <input matInput type="password" formControlName="password" required>
-            <mat-error *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
-              Password is required (min 6 characters)
-            </mat-error>
-          </mat-form-field>
-          <div class="row pt-2">
-            <div class="col-12 col-md-6 col-lg-4">
-              <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">
-                Sign Up
-              </button>
-            </div>
-            <div class="col-12 col-md-6 col-lg-8">
-              <button mat-raised-button color="secondary" type=button (click)="switchMode()">
-                Existing user? Sign in.
-              </button>
-            </div>
-          </div>
-        </mat-card>
-      </form>
-    </div>
-  </div>
-  <div class="row" *ngIf="loggedIn && !activeSession">
-    <div class="col-12">
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <mat-card>
-          <mat-card-title class="mb-3">Sign In</mat-card-title>
           <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="email" required>
-          <mat-error *ngIf="loginForm.get('email')?.invalid">Invalid email</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input matInput formControlName="password" type="password" required>
-          <mat-error *ngIf="loginForm.get('password')?.invalid">Password is required</mat-error>
-        </mat-form-field>
-          <div class="row pt-2">
-            <div class="col-12 col-md-6">
-              <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
-                Login
-              </button>
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" required>
+            <mat-error *ngIf="loginForm.get('password')?.invalid">Password is required</mat-error>
+          </mat-form-field>
+            <div class="row pt-2 button-group">
+              <div class="col-12 col-md-6">
+                <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+                  Login
+                </button>
+              </div>
+              <div class="col-12 col-md-6">
+                <button mat-raised-button color="secondary" type="button" (click)="switchMode()">
+                  Create an account
+                </button>
+              </div>
             </div>
-            <div class="col-12 col-md-6">
-              <button mat-raised-button color="secondary" type="button" (click)="switchMode()">
-                Create an account
-              </button>
-            </div>
-          </div>
-        </mat-card>
-      </form>
+          </mat-card>
+        </form>
+      </div>
     </div>
-  </div>
-  <div class="row text-center" *ngIf="activeSession">
-    <mat-card>
-      <mat-card-title class="mb-3">Looks like you&rsquo;re already signed in</mat-card-title>
-      <button mat-raised-button color="accent" type="button" matTooltip="Logout" (click)="logout()">
-        Logout
-      </button>
-    </mat-card>
+    <div class="row text-center" *ngIf="activeSession">
+      <mat-card>
+        <mat-card-title class="mb-3">Looks like you&rsquo;re already signed in</mat-card-title>
+        <button mat-raised-button color="accent" type="button" matTooltip="Logout" (click)="logout()">
+          Logout
+        </button>
+      </mat-card>
+    </div>
   </div>
 </div>
