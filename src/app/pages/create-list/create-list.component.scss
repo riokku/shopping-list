@@ -9,7 +9,7 @@
     margin: 0;
   }
   h3{
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
   img{
     width: clamp(200px, 400px, 100%);
@@ -93,3 +93,26 @@ form{
 ::ng-deep .backdrop{
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+@media (max-width: 1100px) {
+  .working-list-wrapper{
+    margin-top: 2rem;
+  }
+  .in-list-item-actions{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: end;
+    button{
+      margin-right: 0 !important;
+    }
+  }
+  .list-section{
+    margin-bottom: 4rem;
+  }
+  .selected-item-list{
+    li{
+      padding: 0.5rem 1rem;
+    }
+  }
+} 

@@ -25,7 +25,9 @@
           <div class="item-section" *ngFor="let aisle of aisleOrder">
             <ng-container *ngIf="groupedItems[aisle]?.length">
               <div class="aisle-header">
-                <h3>{{ aisle }}</h3>
+                <h4>
+                  {{ aisle }}
+                </h4>
               </div>
               <div class="items-wrapper">
                 <ul>

@@ -72,7 +72,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-6 col-lg-8">
+      <div class="col-12 col-md-6 col-lg-8 list-section">
         <div class="working-list-wrapper">
           <div class="selected-list-header">
             <h3>
@@ -84,6 +84,9 @@
             </button>
           </div>
           <hr>
+          <p *ngIf="selectedItems.length < 1">
+            <i>Add items to see them here...</i>
+          </p>
           <ul class="selected-item-list">
             <li *ngFor="let selectedItem of selectedItems; let i = index" [ngClass]="{'is-being-edited': isEditing()}">
               <div class="in-list-item-details">

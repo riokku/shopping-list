@@ -75,12 +75,10 @@ mat-toolbar {
 .site-logo {
   display: flex;
   align-items: center;
-
   a {
     text-decoration: none;
     color: inherit;
   }
-
   .site-title {
     font-size: 1.25rem;
   }
@@ -134,7 +132,7 @@ mat-toolbar {
   .site-logo{
     widtH: 100%;
     .site-title {
-      font-size: 1.5rem;
+      font-size: 1.55rem;
     }
   } 
 }

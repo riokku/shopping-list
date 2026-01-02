@@ -185,7 +185,8 @@ export class CreateListComponent {
   //   return item ? `${item.name} (${item.aisle})` : '';
   // }
   displaySelectedItem(item: any): string {
-    return item ? `${item.item_name} (${item.item_aisle})` : '';
+    //return item ? `${item.item_name} (${item.item_aisle})` : '';
+    return item ? `${item.item_name}` : '';
   }
 
 }

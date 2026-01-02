@@ -39,11 +39,6 @@ mat-divider{
   background-color: var(--primary-50);
   border-radius: 0.5rem;
   padding: 0.75rem 1.5rem;
-  &:hover{
-    .in-list-item-actions{
-      visibility: visible;
-    }
-  }
 }
 
 .actions-wrapper{
@@ -65,7 +60,6 @@ mat-divider{
 }
 
 .in-list-item-actions{
-  visibility: hidden;
   button{
     width: 36px;
     height: 36px;
@@ -77,4 +71,22 @@ mat-divider{
 
 ::ng-deep .backdrop{
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 1100px) {
+  .catalog-wrapper{
+    margin-top: 2rem;
+  }
+  .in-list-item-actions{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: end;
+    button{
+      margin-right: 0 !important;
+    }
+  }
+  section{
+    margin-bottom: 4rem;
+  }
 }
