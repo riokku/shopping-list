@@ -17,7 +17,7 @@ button{
   width: 100%;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 767px) {
   .page-wrapper{
     padding: 0;
   }
@@ -29,7 +29,6 @@ button{
   }
 
   mat-card{
-    width: 400px;
     max-width: 100%;
   }
 }

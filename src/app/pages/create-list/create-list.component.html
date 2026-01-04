@@ -12,7 +12,7 @@
             </div>
           </div>
           <div class="list-label">
-            <p class="fs-5 m-0 p-0">
+            <p class="fs-6 m-0 p-0">
               Add an item to your list:
             </p>
           </div>
@@ -93,18 +93,18 @@
                 <p class="mb-2">
                   <strong>{{selectedItem.item.item_name}}</strong> ({{selectedItem.quantity}})<br />
                   <!-- (Aisle: {{selectedItem.item.item_aisle}})<br /> -->
-                </p>                                
+                </p>
                 <p *ngIf="selectedItem.notes" class="d-flex align-items-center mb-0">
                   <mat-icon class="me-2">notes</mat-icon>
                   <span class="fst-italic">{{selectedItem.notes}}</span>
                 </p>
               </div>
               <div class="in-list-item-actions">
-                <button mat-mini-fab aria-label="edit item" color="primary" class="me-2" [disabled]="isEditing()" (click)="setFormUpdateItem(selectedItem, i)">
-                  <mat-icon>edit</mat-icon>
+                <button mat-fab extended aria-label="edit item" color="" class="me-2" [disabled]="isEditing()" (click)="setFormUpdateItem(selectedItem, i)">
+                  Edit
                 </button>
-                <button mat-mini-fab aria-label="delete item" color="accent" [disabled]="isEditing()" (click)="deleteItem(selectedItem)">
-                  <mat-icon>delete</mat-icon>
+                <button mat-fab extended aria-label="delete item" color="accent" [disabled]="isEditing()" (click)="deleteItem(selectedItem)">
+                  Delete
                 </button>
               </div>
             </li>
