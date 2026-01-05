@@ -28,7 +28,7 @@ mat-divider{
 .form-header{
   background-color: var(--primary-700);
   color: #fff;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   font-weight: 500;
 }
 
@@ -51,7 +51,6 @@ mat-divider{
 }
 
 .store-item-picker-form{
-  background-color: ghostwhite;
   border-radius: 0.5rem;
 }
 
@@ -88,5 +87,12 @@ mat-divider{
   }
   section{
     margin-bottom: 4rem;
+  }
+  h1{
+    font-size: 1.5rem;
+    padding: 0.75rem 1.5rem !important;
+  }
+  h2{
+    font-size: 1.25rem;
   }
 }
